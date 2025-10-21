@@ -34,6 +34,7 @@ define ('CALLFORPAPER_APPROVED', -3);
 define ('CALLFORPAPER_TIMEADDED', 0);
 define ('CALLFORPAPER_TIMEMODIFIED', -4);
 define ('CALLFORPAPER_TAGS', -5);
+define ('CALLFORPAPER_REVIEWCOUNT', -6);
 
 define ('CALLFORPAPER_CAP_EXPORT', 'mod/callforpaper:viewalluserpresets');
 // Users having assigned the default role "Non-editing teacher" can export callforpaper records
@@ -812,6 +813,10 @@ function callforpaper_generate_default_template(&$callforpaper, $template, $reco
         'listtemplateheader',
         'listtemplatefooter',
         'rsstitletemplate',
+        'reviewerlisttemplate',
+        'reviewerlisttemplateheader',
+        'reviewerlisttemplatefooter',
+        'slottemplate',
     ];
     if (in_array($template, $emptytemplates)) {
         return '';
@@ -1778,6 +1783,7 @@ function callforpaper_print_preference_form($callforpaper, $perpage, $search, $s
         echo '</optgroup>';
     }
     $options = array();
+    $options[CALLFORPAPER_REVIEWCOUNT]  = get_string('reviewcount', 'callforpaper');
     $options[CALLFORPAPER_TIMEADDED]    = get_string('timeadded', 'callforpaper');
     $options[CALLFORPAPER_TIMEMODIFIED] = get_string('timemodified', 'callforpaper');
     $options[CALLFORPAPER_FIRSTNAME]    = get_string('authorfirstname', 'callforpaper');
@@ -2868,6 +2874,16 @@ function callforpaper_extend_settings_navigation(settings_navigation $settings, 
         $importentriesnode->set_show_in_secondary_navigation(false);
     }
 
+    if (has_capability('mod/callforpaper:reviewentry', $settings->get_page()->cm->context)) {
+        $reviewentriesnode = $callforpapernode->add(
+            get_string('reviewentries', 'callforpaper'),
+            new moodle_url('/mod/callforpaper/reviewview.php', array('d' => $callforpaper->id)),
+            navigation_node::TYPE_CUSTOM,
+            null,
+            'reviewentries',
+        );
+    }
+
     if (has_capability('mod/callforpaper:managetemplates', $settings->get_page()->cm->context)) {
         $currenttab = '';
         if ($currenttab == 'list') {
@@ -2880,11 +2896,27 @@ function callforpaper_extend_settings_navigation(settings_navigation $settings, 
             $defaultemplate = 'singletemplate';
         }
 
-        $callforpapernode->add(get_string('presets', 'callforpaper'), new moodle_url('/mod/callforpaper/preset.php', array('d' => $callforpaper->id)));
-        $callforpapernode->add(get_string('fields', 'callforpaper'),
-            new moodle_url('/mod/callforpaper/field.php', array('d' => $callforpaper->id)));
-        $callforpapernode->add(get_string('templates', 'callforpaper'),
-            new moodle_url('/mod/callforpaper/templates.php', array('d' => $callforpaper->id)));
+        $callforpapernode->add(
+            get_string('presets', 'callforpaper'),
+            new moodle_url('/mod/callforpaper/preset.php', array('d' => $callforpaper->id)),
+            navigation_node::TYPE_CUSTOM,
+            null,
+            'presets',
+        );
+        $callforpapernode->add(
+            get_string('fields', 'callforpaper'),
+            new moodle_url('/mod/callforpaper/field.php', array('d' => $callforpaper->id)),
+            navigation_node::TYPE_CUSTOM,
+            null,
+            'fields',
+        );
+        $callforpapernode->add(
+            get_string('templates', 'callforpaper'),
+            new moodle_url('/mod/callforpaper/templates.php', array('d' => $callforpaper->id)),
+            navigation_node::TYPE_CUSTOM,
+            null,
+            'templates',
+        );
     }
 
     if (!empty($CFG->enablerssfeeds) && !empty($CFG->callforpaper_enablerssfeeds) && $callforpaper->rssarticles > 0) {
@@ -3492,6 +3524,15 @@ function callforpaper_update_completion_state($callforpaper, $course, $cm) {
             $completion->update_state($cm, COMPLETION_INCOMPLETE);
         }
     }
+}
+
+/**
+ * Get icon mapping for font-awesome.
+ */
+function mod_callforpaper_get_fontawesome_icon_map() {
+    return [
+        'mod_callforpaper:t/review' => 'fa-hand-holding-heart'
+    ];
 }
 
 /*

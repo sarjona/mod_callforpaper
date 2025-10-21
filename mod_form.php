@@ -26,6 +26,11 @@ class mod_callforpaper_mod_form extends moodleform_mod {
 
         $this->standard_intro_elements(get_string('intro', 'callforpaper'));
 
+        $mform->addElement('text', 'maxreviewers', get_string('maxreviewers', 'callforpaper'));
+        $mform->setType('maxreviewers', PARAM_INT);
+        $mform->addRule('maxreviewers', null, 'numeric', null, 'client');
+        $mform->addRule('maxreviewers', null, 'required', null, 'client');
+
         // ----------------------------------------------------------------------
         $mform->addElement('header', 'entrieshdr', get_string('entries', 'callforpaper'));
 

@@ -79,7 +79,7 @@
 
     if ($currenttab == 'templates' and isset($mode) && isset($templatestab)) {
         $templatestab->inactive = true;
-        $templatelist = array ('listtemplate', 'singletemplate', 'asearchtemplate', 'addtemplate', 'rsstemplate', 'csstemplate', 'jstemplate');
+        $templatelist = array ('listtemplate', 'singletemplate', 'asearchtemplate', 'addtemplate', 'rsstemplate', 'csstemplate', 'jstemplate', 'reviewerlisttemplate', 'slottemplate');
 
         $currenttab ='';
         foreach ($templatelist as $template) {
@@ -95,5 +95,3 @@
 
 // Print out the tabs and continue!
     echo $OUTPUT->tabtree($row, $currenttab);
-
-

@@ -16,7 +16,7 @@
 /**
  * Javascript module for importing presets.
  *
- * @module     mod_data/importpresets
+ * @module     mod_callforpaper/importpresets
  * @copyright  2022 Laurent David <laurent.david@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -43,7 +43,7 @@ export const init = () => {
         event.preventDefault();
         const modalForm = new ModalForm({
             modalConfig: {
-                title: getString('importpreset', 'mod_data'),
+                title: getString('importpreset', 'mod_callforpaper'),
             },
             formClass: 'mod_callforpaper\\form\\import_presets',
             args: {cmid: importPresetButton.dataset.callforpaperid},

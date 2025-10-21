@@ -52,6 +52,17 @@ $capabilities = array(
         )
     ),
 
+    'mod/callforpaper:reviewentry' => array(
+
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => array(
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
+
     'mod/callforpaper:writeentry' => array(
 
         'riskbitmask' => RISK_SPAM,
