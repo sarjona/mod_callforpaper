@@ -221,6 +221,7 @@ class callforpaper_field_base {     // Base class for Call for paper Field Types
         $this->field->name = '';
         $this->field->description = '';
         $this->field->required = false;
+        $this->field->hidden = false;
 
         return true;
     }
@@ -237,6 +238,7 @@ class callforpaper_field_base {     // Base class for Call for paper Field Types
         $this->field->name        = trim($callforpaper->name);
         $this->field->description = trim($callforpaper->description);
         $this->field->required    = !empty($callforpaper->required) ? 1 : 0;
+        $this->field->hidden      = !empty($callforpaper->hidden) ? 1 : 0;
 
         if (isset($callforpaper->param1)) {
             $this->field->param1 = trim($callforpaper->param1);
@@ -774,6 +776,10 @@ class callforpaper_field_base {     // Base class for Call for paper Field Types
         // Whether the field is required.
         if (isset($this->field->required)) {
             $callforpaper['required'] = $this->field->required;
+        }
+        // Whether the field is hidden.
+        if (isset($this->field->hidden)) {
+            $callforpaper['hidden'] = $this->field->hidden;
         }
 
         // Add all the field parameters.

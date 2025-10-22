@@ -57,7 +57,7 @@ class backup_callforpaper_activity_structure_step extends backup_activity_struct
         $field = new backup_nested_element('field', array('id'), array(
             'type', 'name', 'description', 'required', 'param1', 'param2',
             'param3', 'param4', 'param5', 'param6',
-            'param7', 'param8', 'param9', 'param10'));
+            'param7', 'param8', 'param9', 'param10', 'hidden'));
 
         $records = new backup_nested_element('records');
 

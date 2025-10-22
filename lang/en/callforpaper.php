@@ -494,3 +494,4 @@ $string['dislike'] = 'Dislike!';
 $string['reviewers'] = 'Reviewers';
 $string['reviewersheader'] = 'Reviewers header';
 $string['reviewer_i'] = 'Reviewer {$a}';
+$string['hiddenfield'] = 'Hidden field';
