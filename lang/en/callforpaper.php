@@ -378,6 +378,7 @@ $string['privacy:metacallforpaper:callforpaperfieldnpluginsummary'] = 'Fields fo
 $string['privacy:metacallforpaper:filepurpose'] = 'File attached to the callforpaper record';
 $string['privacy:metacallforpaper:tagpurpose'] = 'Tags on callforpaper records';
 $string['privacy:metacallforpaper:ratingpurpose'] = 'Ratings on callforpaper records';
+$string['program'] = 'Program';
 $string['radiobutton'] = 'Radio buttons';
 $string['recordapproved'] = 'Entry approved';
 $string['recorddeleted'] = 'Entry deleted';

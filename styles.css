@@ -205,3 +205,8 @@
 #page-mod-callforpaper-preset .table {
     margin-bottom: 10rem;
 }
+
+td.entry-not-approved,
+.entry-not-approved a {
+    color: var(--bs-gray-500) !important;
+}

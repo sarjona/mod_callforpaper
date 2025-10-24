@@ -184,7 +184,7 @@ class template {
      */
     public function add_options(array $options = []) {
         $cm = $this->manager->get_coursemodule();
-        $baseurl = $options['baseurl'] ?? new moodle_url('/mod/callforpaper/view.php', ['id' => $cm->id]);
+        $baseurl = $options['baseurl'] ?? new moodle_url('/mod/callforpaper/view.php', ['d' => $cm->instance]);
         if (isset($options['page'])) {
             $baseurl->params([
                 'page' => $options['page'],

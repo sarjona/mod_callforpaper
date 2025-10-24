@@ -274,8 +274,140 @@ class manager {
         return $entries;
     }
 
+    public function get_rooms(): array {
+        global $DB;
+
+        $roomfieldid = $this->get_room_field();
+        if (!$roomfieldid) {
+            return [];
+        }
+
+        $roomsvalue = $DB->get_record(
+            table: 'callforpaper_fields',
+            conditions: ['id' => $roomfieldid],
+            fields: 'param1',
+        );
+
+        return array_map('trim', explode("\n", $roomsvalue->param1));
+    }
+
+    public function get_records_per_rooms(): array {
+        global $DB;
+
+        $roomfieldid = $this->get_room_field();
+        if (!$roomfieldid) {
+            return [];
+        }
+
+        $entries = [];
+        $records = $DB->get_records_select(
+            table: 'callforpaper_content',
+            select: 'fieldid = :fieldid AND content IS NOT NULL',
+            params: ['fieldid' => $roomfieldid],
+            fields: 'recordid',
+        );
+        foreach ($records as $recordid => $record) {
+            $record = $DB->get_record('callforpaper_records', ['id' => $recordid]);
+            $room = $DB->get_field(
+                'callforpaper_content',
+                'content',
+                ['recordid' => $recordid, 'fieldid' => $roomfieldid],
+            );
+            $entries[$room][$recordid] = $record;
+        }
+
+        return $entries;
+    }
+
+    public function get_entries_per_programdate(): array {
+        global $DB;
+
+        $programdatefieldid = $this->get_programdate_field();
+        if (!$programdatefieldid) {
+            return [];
+        }
+
+        $entries = [];
+        $records = $DB->get_records_select(
+            table: 'callforpaper_content',
+            select: 'fieldid = :fieldid AND content IS NOT NULL',
+            params: ['fieldid' => $programdatefieldid],
+            sort: 'content ASC, content1 ASC',
+            fields: 'recordid',
+        );
+        foreach ($records as $recordid => $record) {
+            $entry = $DB->get_records('callforpaper_content', ['recordid' => $recordid]);
+            $programdate = $DB->get_record(
+                'callforpaper_content',
+                ['recordid' => $recordid, 'fieldid' => $programdatefieldid],
+                'content, content1',
+            );
+            // Content is startime and content1 is endtime.
+            $entries[$programdate->content][$programdate->content1][$recordid] = $entry;
+        }
+
+        return $entries;
+    }
+
+    public function is_entry_scheduled(array $entryfields, string $room, int $starttime, int $endtime): bool {
+        $roomfieldid = $this->get_room_field();
+        if (!$roomfieldid) {
+            return false;
+        }
+        $programdatefieldid = $this->get_programdate_field();
+        if (!$programdatefieldid) {
+            return false;
+        }
+
+        $roomfield = array_filter($entryfields, function($content) use ($roomfieldid, $room) {
+            if ($content->fieldid != $roomfieldid) {
+                return false;
+            }
+            return ($content->content == $room);
+        });
+        if (empty($roomfield)) {
+            return false;
+        }
+
+        $programdatefield = array_filter($entryfields, function($content) use ($programdatefieldid, $starttime, $endtime) {
+            if ($content->fieldid != $programdatefieldid) {
+                return false;
+            }
+            return ($starttime >= $content->content  && $endtime <= $content->content1);
+        });
+
+
+        return !empty($programdatefield);
+    }
+    protected function get_room_field(): ?int {
+        // For now, the room field is identified by its name 'Room'.
+        // In the future this could be made more flexible by adding a specific setting.
+        return $this->get_named_field('Room');
+    }
+
+    protected function get_programdate_field(): ?int {
+        // For now, the program date field is identified by its name 'Program Date'.
+        // In the future this could be made more flexible by adding a specific setting.
+        return $this->get_named_field('Program date');
+    }
+
+    protected function get_named_field(string $fieldname): ?int {
+        global $DB;
+
+        $fieldrecord = $DB->get_record('callforpaper_fields', [
+            'callforpaperid' => $this->instance->id,
+            'name' => $fieldname,
+        ], '*', IGNORE_MISSING);
+
+        if ($fieldrecord) {
+            return $fieldrecord->id;
+        }
+
+        return null;
+    }
+
     /**
-     * Return the callforpaper entries filtered by approved and/or userid.
+     * Return the callforpaper entries filtered by approved
      *
      * @param array $entries Entries to filter from.
      * @param int $approved Approved value to filter by.
@@ -443,6 +575,19 @@ class manager {
                 has_capability('mod/callforpaper:exportentry', $this->context) ||
                 (has_capability('mod/callforpaper:exportownentry', $this->context) &&
                 $DB->record_exists('callforpaper_records', ['userid' => $userid, 'callforpaperid' => $this->instance->id]));
+    }
+
+    /** Check if the user can manage templates on the current context.
+     *
+     * @param int $userid the user id to check ($USER->id if null).
+     * @return bool if the user can manage templates on current context.
+     */
+    public function can_approve_entries(?int $userid = null): bool {
+        global $USER;
+        if (!$userid) {
+            $userid = $USER->id;
+        }
+        return has_capability('mod/callforpaper:approve', $this->context, $userid);
     }
 
     /**

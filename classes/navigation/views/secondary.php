@@ -32,10 +32,11 @@ class secondary extends core_secondary {
     protected function get_default_module_mapping(): array {
         $basenodes = parent::get_default_module_mapping();
         $basenodes[self::TYPE_CUSTOM] += [
-            'templates' => 5,
             'reviewentries' => 2,
-            'fields' => 3,
-            'presets' => 4,
+            'program' => 3,
+            'fields' => 4,
+            'presets' => 5,
+            // 'templates' => 5.1,
         ];
 
         return $basenodes;

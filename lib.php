@@ -2890,6 +2890,14 @@ function callforpaper_extend_settings_navigation(settings_navigation $settings, 
         );
     }
 
+    $programnode = $callforpapernode->add(
+        get_string('program', 'callforpaper'),
+        new \core\url('/mod/callforpaper/program.php', ['id' => $settings->get_page()->cm->id]),
+        navigation_node::TYPE_CUSTOM,
+        null,
+        'program',
+    );
+
     if (has_capability('mod/callforpaper:managetemplates', $settings->get_page()->cm->context)) {
         $currenttab = '';
         if ($currenttab == 'list') {
