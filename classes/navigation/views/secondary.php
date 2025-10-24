@@ -34,8 +34,8 @@ class secondary extends core_secondary {
         $basenodes[self::TYPE_CUSTOM] += [
             'templates' => 5,
             'reviewentries' => 2,
-            'presets' => 3,
-            'fields' => 4,
+            'fields' => 3,
+            'presets' => 4,
         ];
 
         return $basenodes;
