@@ -1,0 +1,134 @@
+/* Karte */
+.recipe-card {
+  max-width: 720px;               /* etwas schmaler für Broschüren-Optik */
+  margin: 1rem auto 2rem;
+  background: #fff;
+  border: 1px solid #ddd;        /* etwas dezenter */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* sanftere Schatten */
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.status-badge {
+  display:inline-block;
+  margin:0.5rem 0 1rem;
+  padding:0.35rem 0.75rem;
+  border-radius:0.5rem;
+  font-size:0.9rem;
+  font-weight:600;
+  background:#E6F0FF;
+  color:#2A4A7B;
+}
+
+/* Media */
+.media-wrap {
+  position: relative;
+  overflow: hidden;
+  max-height: 280px;             /* Bildhöhe begrenzen */
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.media-wrap img {
+  width: 100% !important;
+  height: auto !important;
+  max-width: none !important;
+  display: block;
+  object-fit: cover;             /* Bild locker füllen */
+  max-height: 280px;
+}
+
+
+
+/* Titel-Overlay */
+.title-overlay {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 72px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 85%);
+}
+
+.title-text {
+  position: absolute; right: 20px; bottom: 14px;
+  color: #f0f3f5;
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  max-width: 80%;
+}
+
+/* Fallback-Titel wenn kein Bild */
+.title-plain {
+  display: none; /* per JS wird „block“ */
+  margin: 0 0 0.5rem 0;
+  color: #2f3c44;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+/* Body */
+.recipe-body {
+  padding: 20px 24px 24px;
+  color: #333;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Course-Pill */
+.course-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  margin: 8px 0 18px 0;
+  border-radius: 20px;
+  background: rgba(30, 120, 180, 0.15); /* dezentes Blau mit Transparenz */
+  color: #1e78b4;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 1px 3px rgba(30, 120, 180, 0.3);
+}
+
+/* Abschnitte */
+.section {
+  margin-top: 1rem;
+}
+
+.section-title {
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  color: #1e3d59; /*etwas dunkleres Blau */
+  border-bottom: 2px solid #65a1b3; 
+  padding-bottom: 4px;
+  font-size: 1.12rem;
+}
+
+.section-divider {
+  height: 1px;
+  background: #d0d7de;
+  margin: 0.5rem 0 1rem;
+}
+
+.section-content {
+  line-height: 1.7;
+  color: #444;
+  font-size: 1rem;
+  white-space: pre-line; /* für mehrzeilige Zutatenliste */
+}
+
+/* Quelle */
+.recipe-source {
+  text-align: right;
+  color: #6a7d89;
+  margin-top: 28px;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.lv-status {
+  display:inline-block;
+  margin-right:.5rem;
+  font-size:.85rem;
+  font-weight:600;
+  color:#4E7488;
+}
+
+

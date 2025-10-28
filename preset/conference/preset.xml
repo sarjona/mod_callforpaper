@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<preset>
+
+<description/>
+
+<settings>
+<intro/>
+<comments>0</comments>
+<requiredentries>0</requiredentries>
+<requiredentriestoview>0</requiredentriestoview>
+<maxentries>0</maxentries>
+<rssarticles>0</rssarticles>
+<approval>1</approval>
+<manageapproved>1</manageapproved>
+<defaultsortdir>0</defaultsortdir>
+<defaultsort>-3</defaultsort>
+</settings>
+
+<field>
+<type>picture</type>
+<name>Photo</name>
+<description>Photo</description>
+<required>0</required>
+<param3>0</param3>
+</field>
+
+<field>
+<type>file</type>
+<name>Presentation (file)</name>
+<description>File containing the presentation to be used during the talk</description>
+<required>0</required>
+<param3>104857600</param3>
+</field>
+
+<field>
+<type>url</type>
+<name>Presentation (URL)</name>
+<description>URL of presentation</description>
+<required>0</required>
+<param1>on</param1>
+<param2>External link to the presentation</param2>
+<param3>on</param3>
+</field>
+
+<field>
+<type>url</type>
+<name>Recording of the session</name>
+<required>0</required>
+<param1>on</param1>
+<param2>Access the recording of the session (opens in a new window)</param2>
+<param3>on</param3>
+</field>
+
+<field>
+<type>text</type>
+<name>Title</name>
+<required>0</required>
+</field>
+
+<field>
+<type>radiobutton</type>
+<name>Type of presentation</name>
+<required>0</required>
+<param1>Presentation
+Workshop
+Poster</param1>
+</field>
+
+<field>
+<type>textarea</type>
+<name>Abstract</name>
+<description>(only text)</description>
+<required>0</required>
+<param2>40</param2>
+<param3>20</param3>
+<param4>1</param4>
+<param5>1</param5>
+</field>
+
+<field>
+<type>text</type>
+<name>Speaker name</name>
+<required>0</required>
+</field>
+
+<field>
+<type>text</type>
+<name>Speaker email</name>
+<required>0</required>
+</field>
+
+<field>
+<type>multimenu</type>
+<name>Target Groups</name>
+<description>You can select multiple options.</description>
+<required>0</required>
+<param1>Martians
+Moonians
+Sunnies
+Juptierians</param1>
+</field>
+
+<field>
+<type>menu</type>
+<name>Room</name>
+<required>0</required>
+<param1>Aula Magna
+Sala 3iPunt
+Sal&#xF3;n de Grados
+Sala Murales</param1>
+<hidden>1</hidden>
+</field>
+
+<field>
+<type>duration</type>
+<name>Program date</name>
+<required>0</required>
+<hidden>1</hidden>
+</field>
+
+</preset>

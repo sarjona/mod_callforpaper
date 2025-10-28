@@ -1,0 +1,116 @@
+<!-- Back Button (top) -->
+<p class="d-print-none" style="margin-bottom:.75rem;">
+  <a href="#" class="btn btn-secondary btn-sm back-to-list" role="button">
+    <i class="fa-solid fa-arrow-left me-1" aria-hidden="true"></i> Back to overview
+  </a>
+</p>
+
+<!-- Card -->
+<div class="recipe-card">
+  <!-- Media: only shows if [[Photo]] contains an <img> -->
+  <div class="media-wrap">
+    [[Photo]]
+    <div class="title-overlay"></div>
+    <div class="title-text">[[Title]]</div>
+  </div>
+
+  <!-- Body -->
+  <div class="recipe-body">
+
+    <!-- Fallback plain title -->
+    <h2 class="title-plain">[[Title]]</h2>
+
+    <section class="section">
+      <h3 class="section-title">Type of Presentation</h3>
+      <div class="section-content">[[Type of Presentation]]</div>
+    </section>
+
+    <section class="section">
+      <h3 class="section-title">Abstract</h3>
+      <div class="section-content">[[Abstract]]</div>
+    </section>
+
+    <section class="section">
+      <h3 class="section-title">Target Groups</h3>
+      <div class="section-content">[[Target Groups]]</div>
+    </section>
+
+    <section class="section">
+      <h3 class="section-title">Speaker Name</h3>
+      <div class="section-content">[[Speaker name]]</div>
+    </section>
+
+    <section class="section">
+      <h3 class="section-title">E-Mail of Speaker</h3>
+      <div class="section-content">[[Speaker email]]</div>
+    </section>
+
+    <section class="section">
+      <h3 class="section-title">Presentation URL</h3>
+      <div class="section-content">[[Presentation (URL)]]</div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Edit/Delete (Moodle placeholders) -->
+<p class="d-print-none">##edit## &nbsp; ##delete## &nbsp;  ##approve## &nbsp; ##disapprove##</p>
+
+<!-- Back Button (bottom) -->
+<p class="d-print-none" style="margin-top:1rem;">
+  <a href="#" class="btn btn-secondary btn-sm back-to-list" role="button">
+    <i class="fa-solid fa-arrow-left me-1" aria-hidden="true"></i> Back to overview
+  </a>
+</p>
+
+<!-- JS: Title Fallback & List URL -->
+<script>
+(function(){
+  const media = document.querySelector('.media-wrap');
+  const hasImg = !!(media && media.querySelector('img'));
+  const overlay = media ? media.querySelector('.title-overlay') : null;
+  const overlayText = media ? media.querySelector('.title-text') : null;
+  const plainTitle = document.querySelector('.title-plain');
+
+  if (!hasImg) {
+    if (overlay) overlay.style.display = 'none';
+    if (overlayText) overlayText.style.display = 'none';
+    if (plainTitle) plainTitle.style.display = 'block';
+  } else {
+    if (plainTitle) plainTitle.style.display = 'none';
+  }
+
+  document.querySelectorAll('.back-to-list').forEach(function(link){
+    try {
+      const url = new URL(window.location.href);
+      const d = url.searchParams.get('d');
+      if (d) {
+        const list = new URL(window.location.href);
+        list.searchParams.set('d', d);
+        ['rid','mode','page','sesskey'].forEach(p => list.searchParams.delete(p));
+        list.searchParams.set('mode', 'browse');
+        link.href = list.pathname + list.search;
+      } else {
+        link.addEventListener('click', e => { e.preventDefault(); history.back(); });
+      }
+    } catch (e) {
+      link.addEventListener('click', e => { e.preventDefault(); history.back(); });
+    }
+  });
+})();
+</script><div class=" added_field">
+    <div class="mt-4">
+        <span class="fw-bold">[[Room#name]]</span>
+        <p class="mt-2">[[Room]]</p>
+    </div>
+</div><div class=" added_field">
+    <div class="mt-4">
+        <span class="fw-bold"></span>
+        <p class="mt-2"></p>
+    </div>
+</div><div class=" added_field">
+    <div class="mt-4">
+        <span class="fw-bold">[[Program date#name]]</span>
+        <p class="mt-2">[[Program date]]</p>
+    </div>
+</div>

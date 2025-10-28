@@ -1,0 +1,16 @@
+<script>
+(function(){
+  const buckets = {
+    'presentation': document.getElementById('list-presentation'),
+    'workshop': document.getElementById('list-workshop'),
+    'poster': document.getElementById('list-poster')
+  };
+
+  const items = Array.from(document.querySelectorAll('.lv-item'));
+  items.forEach(el => {
+    let course = (el.getAttribute('data-course') || '').trim().toLowerCase();
+    const target = buckets[course] || buckets['presentation']; // fallback
+    if (target) target.appendChild(el);
+  });
+})();
+</script>
