@@ -794,7 +794,6 @@ class callforpaper_field_base {     // Base class for Call for paper Field Types
 
 }
 
-
 /**
  * Given a template and a callforpaperid, generate a default case template
  *
@@ -819,10 +818,6 @@ function callforpaper_generate_default_template(&$callforpaper, $template, $reco
         'listtemplateheader',
         'listtemplatefooter',
         'rsstitletemplate',
-        'reviewerlisttemplate',
-        'reviewerlisttemplateheader',
-        'reviewerlisttemplatefooter',
-        'slottemplate',
     ];
     if (in_array($template, $emptytemplates)) {
         return '';

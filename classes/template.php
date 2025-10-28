@@ -128,6 +128,7 @@ class template {
             case 'listtemplate':
             case 'rsstemplate':
             case 'singletemplate':
+            case 'slottemplate':
                 $template = new \mod_callforpaper\output\defaulttemplate($manager->get_fields(), $templatename, $form);
                 $content = $renderer->render_defaulttemplate($template);
         }
