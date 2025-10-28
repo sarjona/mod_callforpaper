@@ -56,7 +56,7 @@ class restore_callforpaper_activity_task extends restore_activity_task {
 
         $contents[] = new restore_decode_content('callforpaper', array(
                               'intro', 'singletemplate', 'listtemplate', 'listtemplateheader', 'listtemplatefooter',
-                              'addtemplate', 'rsstemplate', 'rsstitletemplate', 'asearchtemplate'), 'callforpaper');
+                              'addtemplate', 'rsstemplate', 'rsstitletemplate', 'asearchtemplate', 'reviewerlisttemplate', 'reviewerlisttemplateheader', 'reviewerlisttemplatefooter', 'slottemplate'), 'callforpaper');
         $contents[] = new restore_decode_content('callforpaper_fields', array(
                               'description', 'param1', 'param2', 'param3',
                               'param4', 'param5', 'param6', 'param7',

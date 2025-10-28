@@ -45,7 +45,9 @@ class backup_callforpaper_activity_structure_step extends backup_activity_struct
             'addtemplate', 'rsstemplate', 'rsstitletemplate', 'csstemplate',
             'jstemplate', 'asearchtemplate', 'approval', 'manageapproved', 'scale',
             'assessed', 'assesstimestart', 'assesstimefinish', 'defaultsort',
-            'defaultsortdir', 'editany', 'notification', 'timemodified', 'config', 'completionentries'));
+            'defaultsortdir', 'editany', 'notification', 'timemodified', 'config', 'completionentries',
+            'reviewerlisttemplate', 'reviewerlisttemplateheader', 'reviewerlisttemplatefooter', 'slottemplate'
+        ));
 
         $tags = new backup_nested_element('recordstags');
         $tag = new backup_nested_element('tag', array('id'), array('itemid', 'rawname'));
