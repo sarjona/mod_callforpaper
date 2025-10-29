@@ -16,7 +16,8 @@
     border: 0;
 }
 
-#page-mod-callforpaper-view div.search_none {
+#page-mod-callforpaper-view div.search_none,
+#page-mod-callforpaper-reviewview div.search_none {
     display: none;
 }
 
