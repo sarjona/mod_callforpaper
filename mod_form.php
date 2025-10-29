@@ -28,6 +28,7 @@ class mod_callforpaper_mod_form extends moodleform_mod {
 
         $mform->addElement('text', 'maxreviewers', get_string('maxreviewers', 'callforpaper'));
         $mform->setType('maxreviewers', PARAM_INT);
+        $mform->setDefault('maxreviewers', 3);
         $mform->addRule('maxreviewers', null, 'numeric', null, 'client');
         $mform->addRule('maxreviewers', null, 'required', null, 'client');
 
@@ -36,6 +37,7 @@ class mod_callforpaper_mod_form extends moodleform_mod {
 
         $mform->addElement('selectyesno', 'approval', get_string('requireapproval', 'callforpaper'));
         $mform->addHelpButton('approval', 'requireapproval', 'callforpaper');
+        $mform->setDefault('approval', 1);
 
         $mform->addElement('selectyesno', 'manageapproved', get_string('manageapproved', 'callforpaper'));
         $mform->addHelpButton('manageapproved', 'manageapproved', 'callforpaper');
