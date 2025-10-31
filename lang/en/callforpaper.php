@@ -103,8 +103,8 @@ $string['callforpaper:viewanyrating'] = 'View total ratings that anyone received
 $string['callforpaper:viewentry'] = 'View entries';
 $string['callforpaper:viewrating'] = 'View the total rating you received';
 $string['callforpaper:writeentry'] = 'Write entries';
-$string['callforpaper:view'] = 'View call for paper activity';
-$string['callforpaper:reviewentry'] = 'Review entry in call for paper activity';
+$string['callforpaper:view'] = 'View call for papers activity';
+$string['callforpaper:reviewentry'] = 'Review entry in call for papers activity';
 $string['date'] = 'Date';
 $string['dateentered'] = 'Date entered';
 $string['datemodified'] = 'Last edited:';
@@ -157,7 +157,7 @@ $string['errorpresetexists'] = 'A preset with this name already exists.';
 $string['errorpresetexistsbutnotoverwrite'] = 'A preset with this name already exists. Choose a different name.';
 $string['errormustsupplyvalue'] = 'You must supply a value here.';
 $string['errorpresetnotfound'] = 'Preset with name {$a} not found.';
-$string['example'] = 'Call for paper module example';
+$string['example'] = 'Call for papers module example';
 $string['excel'] = 'Excel';
 $string['export'] = 'Export';
 $string['exportaszip'] = 'Export as zip';
@@ -198,7 +198,7 @@ $string['fieldwidthlistview'] = 'Width (in pixels) in list view';
 $string['fieldwidthsingleview'] = 'Width (in pixels) in single view';
 $string['file'] = 'File';
 $string['filesnotgenerated'] = 'Not all files were generated: {$a}';
-$string['filtername'] = 'Call for paper auto-linking';
+$string['filtername'] = 'Call for papers auto-linking';
 $string['footer'] = 'Footer';
 $string['forcelinkname'] = 'Forced name for the link';
 $string['foundnorecords'] = 'No records found. <a href="{$a->reseturl}">Clear all</a>';
@@ -231,15 +231,15 @@ $string['includefiles'] = 'Include files in export';
 $string['includetags'] = 'Include tags';
 $string['includetime'] = 'Include time added/modified';
 $string['includeuserdetails'] = 'Include user details';
-$string['indicator:cognitivedepth'] = 'Call for paper cognitive';
-$string['indicator:cognitivedepth_help'] = 'This indicator is based on the cognitive depth reached by the student in a Call for paper activity.';
-$string['indicator:cognitivedepthdef'] = 'Call for paper cognitive';
-$string['indicator:cognitivedepthdef_help'] = 'The participant has reached this percentage of the cognitive engagement offered by the Call for paper activities during this analysis interval (Levels = No view, View, Submit)';
+$string['indicator:cognitivedepth'] = 'Call for papers cognitive';
+$string['indicator:cognitivedepth_help'] = 'This indicator is based on the cognitive depth reached by the student in a Call for papers activity.';
+$string['indicator:cognitivedepthdef'] = 'Call for papers cognitive';
+$string['indicator:cognitivedepthdef_help'] = 'The participant has reached this percentage of the cognitive engagement offered by the Call for papers activities during this analysis interval (Levels = No view, View, Submit)';
 $string['indicator:cognitivedepthdef_link'] = 'Learning_analytics_indicators#Cognitive_depth';
-$string['indicator:socialbreadth'] = 'Call for paper social';
-$string['indicator:socialbreadth_help'] = 'This indicator is based on the social breadth reached by the student in a Call for paper activity.';
-$string['indicator:socialbreadthdef'] = 'Call for paper social';
-$string['indicator:socialbreadthdef_help'] = 'The participant has reached this percentage of the social engagement offered by the Call for paper activities during this analysis interval (Levels = No participation, Participant alone)';
+$string['indicator:socialbreadth'] = 'Call for papers social';
+$string['indicator:socialbreadth_help'] = 'This indicator is based on the social breadth reached by the student in a Call for papers activity.';
+$string['indicator:socialbreadthdef'] = 'Call for papers social';
+$string['indicator:socialbreadthdef_help'] = 'The participant has reached this percentage of the social engagement offered by the Call for papers activities during this analysis interval (Levels = No participation, Participant alone)';
 $string['indicator:socialbreadthdef_link'] = 'Learning_analytics_indicators#Social_breadth';
 $string['insufficiententries'] = 'more entries needed to view this callforpaper';
 $string['intro'] = 'Description';
@@ -290,16 +290,16 @@ $string['menu'] = 'Menu';
 $string['menuchoose'] = 'Choose...';
 $string['missingcallforpaper'] = 'callforpaper ID or object must be provided for field class.';
 $string['missingfield'] = 'Programmer error: You must specify field and/or data when defining field class.';
-$string['modulename'] = 'Call for paper';
-$string['modulename_help'] = 'Call for paper enables participants to create, maintain, and search a collection of entries.
+$string['modulename'] = 'Call for papers';
+$string['modulename_help'] = 'Call for papers enables participants to create, maintain, and search a collection of entries.
 
 The structure of the entries is defined using different types of fields, such as short text, dropdown list, text area, URL, image, or file.
 
 As a teacher, you can comment and rate entries. You can also allow students to rate and comment on entries (peer evaluation). Ratings can be aggregated to form a final grade, which is recorded in the gradebook.
 
-If the Call for paper auto-linking filter is enabled, any entries in a callforpaper will be automatically linked where the words or phrases appear within the course.
+If the Call for papers auto-linking filter is enabled, any entries in a callforpaper will be automatically linked where the words or phrases appear within the course.
 
-You can use Call for paper to:
+You can use Call for papers to:
 
 * Create a collaborative collection of links, books, book reviews, journal references, etc.
 * Display student-created photos, posters, websites or poems for peer comment and review.';
@@ -350,8 +350,8 @@ $string['page-mod-callforpaper-x'] = 'Any callforpaper activity module page';
 $string['pagesize'] = 'Entries per page';
 $string['participants'] = 'Participants';
 $string['picture'] = 'Picture';
-$string['pluginadministration'] = 'Call for paper activity administration';
-$string['pluginname'] = 'Call for paper';
+$string['pluginadministration'] = 'Call for papers activity administration';
+$string['pluginname'] = 'Call for papers';
 $string['portfolionotfile'] = 'Export to a portfolio rather than a file (csv and leap2a only)';
 $string['presetdeleted'] = 'Preset deleted.';
 $string['presetinfo'] = 'Saving as a preset will publish this template. Other users may be able to use it in their callforpapers.';
@@ -423,8 +423,8 @@ $string['saveaspresetmissingcapability'] = 'The user does not have permission to
 $string['savesettings'] = 'Save settings';
 $string['savesuccess'] = 'Preset saved. <a href="{$a->url}">Preview preset</a>';
 $string['search'] = 'Search';
-$string['search:activity'] = 'Call for paper - activity information';
-$string['search:entry'] = 'Call for paper - entries';
+$string['search:activity'] = 'Call for papers - activity information';
+$string['search:entry'] = 'Call for papers - entries';
 $string['searchresults'] = 'Entries containing "{$a}"';
 $string['selectedrequired'] = 'All selected required';
 $string['selectexportoptions'] = 'Select export options';
@@ -436,8 +436,8 @@ $string['single'] = 'View single';
 $string['singleview'] = 'Single view';
 $string['singletemplate'] = 'Single view template';
 $string['startbuilding'] = 'Start building your activity';
-$string['subplugintype_callforpaperfield'] = 'Call for paper field type';
-$string['subplugintype_callforpaperfield_plural'] = 'Call for paper field types';
+$string['subplugintype_callforpaperfield'] = 'Call for papers field type';
+$string['subplugintype_callforpaperfield_plural'] = 'Call for papers field types';
 $string['subplugintype_callforpaperpreset'] = 'Preset';
 $string['subplugintype_callforpaperpreset_plural'] = 'Presets';
 $string['tagarea_callforpaper_records'] = 'callforpaper records';
