@@ -736,7 +736,7 @@ class preset {
         if ($instance->defaultsort > 0 && $sortfield = callforpaper_get_field_from_id($instance->defaultsort, $instance)) {
             $presetxmlcallforpaper .= '<defaultsort>' . htmlspecialchars($sortfield->field->name, ENT_COMPAT) . "</defaultsort>\n";
         } else {
-            $presetxmlcallforpaper .= "<defaultsort>0</defaultsort>\n";
+            $presetxmlcallforpaper .= "<defaultsort>" . CALLFORPAPER_APPROVED . "</defaultsort>\n";
         }
         $presetxmlcallforpaper .= "</settings>\n\n";
 

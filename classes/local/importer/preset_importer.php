@@ -294,7 +294,7 @@ abstract class preset_importer {
         if (!empty($settings->defaultsort)) {
             if (is_numeric($settings->defaultsort)) {
                 // Old broken value.
-                $settings->defaultsort = 0;
+                $settings->defaultsort = CALLFORPAPER_APPROVED;
             } else {
                 $settings->defaultsort = (int)$DB->get_field(
                     'callforpaper_fields',
@@ -303,7 +303,7 @@ abstract class preset_importer {
                 );
             }
         } else {
-            $settings->defaultsort = 0;
+            $settings->defaultsort = CALLFORPAPER_APPROVED;
         }
 
         // Do we want to overwrite all current callforpaper settings?

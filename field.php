@@ -40,7 +40,7 @@ $newtype        = optional_param('newtype','',PARAM_ALPHA);      // type of the 
 $mode           = optional_param('mode','',PARAM_ALPHA);
 $action         = optional_param('action', '', PARAM_ALPHA);
 $fullname       = optional_param('fullname', '', PARAM_PATH);    // Directory the preset is in.
-$defaultsort    = optional_param('defaultsort', 0, PARAM_INT);
+$defaultsort    = optional_param('defaultsort', CALLFORPAPER_APPROVED, PARAM_INT); // Approved status as default sort.
 $defaultsortdir = optional_param('defaultsortdir', 0, PARAM_INT);
 $cancel         = optional_param('cancel', 0, PARAM_BOOL);
 
@@ -444,7 +444,10 @@ if (($mode == 'new') && (!empty($newtype))) { // Adding a new field.
         echo '</optgroup>';
     }
     $options = array();
-    $options[CALLFORPAPER_TIMEADDED]    = get_string('timeadded', 'callforpaper');
+    $options[CALLFORPAPER_TIMEADDED] = get_string('timeadded', 'callforpaper');
+    if ($callforpaper->approval) {
+        $options[CALLFORPAPER_APPROVED] = get_string('approved', 'callforpaper');
+    }
 // TODO: we will need to change defaultsort db to unsinged to make these work in 2.0
 /*        $options[CALLFORPAPER_TIMEMODIFIED] = get_string('timemodified', 'callforpaper');
     $options[CALLFORPAPER_FIRSTNAME]    = get_string('authorfirstname', 'callforpaper');
