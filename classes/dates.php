@@ -48,8 +48,8 @@ class dates extends activity_dates {
      * @return array
      */
     protected function get_dates(): array {
-        $timeopen = $this->cm->customdata['timeavailablefrom'] ?? null;
-        $timeclose = $this->cm->customdata['timeavailableto'] ?? null;
+        $timeopen = $this->cm->customdata['timeviewto'] ?? null;
+        $timeclose = $this->cm->customdata['timeviewfrom'] ?? null;
 
         $this->timeopen = $timeopen ? (int) $timeopen : null;
         $this->timeclose = $timeclose ? (int) $timeclose : null;

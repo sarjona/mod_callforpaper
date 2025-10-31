@@ -56,5 +56,18 @@ function xmldb_callforpaper_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2025100901, 'callforpaper');
     }
 
+    if ($oldversion < 2025100902) {
+
+        // Add timereview field to callforpaper table.
+        $table = new xmldb_table('callforpaper');
+        $field = new xmldb_field('timereview', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'timeviewto');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Savepoint reached.
+        upgrade_mod_savepoint(true, 2025100902, 'callforpaper');
+    }
+
     return true;
 }

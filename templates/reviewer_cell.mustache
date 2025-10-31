@@ -1,0 +1,76 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_callforpaper/reviewer_cell
+
+    Reviewer information.
+
+    Context variables required for this template:
+    * reviewername - The name of the reviewer (optional).
+    * actionurl - The URL to link to for reviewing or editing.
+    * canedit - Whether the current user can edit the reviewer assignment.
+    * addreview - Whether to add a review button.
+
+    Example context (json):
+    {
+        "reviewername": "Reviewer Name",
+        "actionurl": "https://moodlesite/mod/callforpaper/review.php?id=1",
+        "canedit": true
+    }
+}}
+<td>
+{{#reviewername}}
+    <div class="col-xl-12 reviewerinfo">
+        {{#canedit}}
+            <a href="{{actionurl}}" title="{{#str}} edit {{/str}}" class="text-dark">
+                {{#pix}} t/edit, core, {{/pix}} {{{reviewername}}}
+            </a>
+        {{/canedit}}
+        {{^canedit}}
+            {{#canseereview}}
+                <a href="{{actionurl}}" title="{{#str}} view {{/str}}" class="text-dark">
+                    {{#pix}} t/hide, core, {{/pix}} {{{reviewername}}}
+                </a>
+            {{/canseereview}}
+            {{^canseereview}}
+                {{{reviewername}}}
+            {{/canseereview}}
+        {{/canedit}}
+    </div>
+
+    {{#isreject}}
+        <div class="badge bg-danger">{{#str}} reject, mod_callforpaper {{/str}}</div>
+    {{/isreject}}
+
+    {{#isundecided}}
+        <div class="badge bg-warning text-dark">{{#str}} undecided, mod_callforpaper {{/str}}</div>
+    {{/isundecided}}
+
+    {{#isaccept}}
+        <div class="badge bg-success">{{#str}} accept, mod_callforpaper {{/str}}</div>
+    {{/isaccept}}
+{{/reviewername}}
+
+{{^reviewername}}
+    {{#addreview}}
+        <a class="btn btn-outline-dark" href="{{actionurl}}" role="button">
+            {{#str}} review, mod_callforpaper {{/str}}
+        </a>
+    {{/addreview}}
+
+    {{^addreview}}
+        -
+    {{/addreview}}
+{{/reviewername}}
+</td>

@@ -41,6 +41,6 @@ abstract class activity_base extends \core_analytics\local\indicator\community_o
      * @return null|string
      */
     protected function get_timeclose_field() {
-        return 'timeavailableto';
+        return 'timeviewfrom';
     }
 }

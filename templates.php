@@ -32,7 +32,7 @@ $id    = optional_param('id', 0, PARAM_INT);  // course module id
 $d     = optional_param('d', 0, PARAM_INT);   // callforpaper id
 $mode  = optional_param('mode', 'addtemplate', PARAM_ALPHA);
 $action  = optional_param('action', '', PARAM_ALPHA);
-$useeditor = optional_param('useeditor', null, PARAM_BOOL);
+$useeditor = optional_param('useeditor', false, PARAM_BOOL);
 
 $url = new moodle_url('/mod/callforpaper/templates.php');
 

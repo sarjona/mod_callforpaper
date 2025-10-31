@@ -13,7 +13,6 @@ class mod_callforpaper_mod_form extends moodleform_mod {
         $mform =& $this->_form;
 
         //-------------------------------------------------------------------------------
-        $mform->addElement('header', 'general', get_string('general', 'form'));
 
         $mform->addElement('text', 'name', get_string('name'), array('size'=>'64'));
         if (!empty($CFG->formatstringstriptags)) {
@@ -26,64 +25,110 @@ class mod_callforpaper_mod_form extends moodleform_mod {
 
         $this->standard_intro_elements(get_string('intro', 'callforpaper'));
 
-        $mform->addElement('text', 'maxreviewers', get_string('maxreviewers', 'callforpaper'));
-        $mform->setType('maxreviewers', PARAM_INT);
-        $mform->setDefault('maxreviewers', 3);
-        $mform->addRule('maxreviewers', null, 'numeric', null, 'client');
-        $mform->addRule('maxreviewers', null, 'required', null, 'client');
-
         // ----------------------------------------------------------------------
-        $mform->addElement('header', 'entrieshdr', get_string('entries', 'callforpaper'));
+        $mform->addElement('header', 'submissionsheader', get_string('submissions', 'callforpaper'));
 
-        $mform->addElement('selectyesno', 'approval', get_string('requireapproval', 'callforpaper'));
-        $mform->addHelpButton('approval', 'requireapproval', 'callforpaper');
-        $mform->setDefault('approval', 1);
+        $mform->addElement(
+            'date_time_selector',
+            'timeviewto',
+            get_string('availablefromdate', 'callforpaper'),
+            ['optional' => true],
+        );
+
+        $mform->addElement(
+            'date_time_selector',
+            'timeviewfrom',
+            get_string('availabletodate', 'callforpaper'),
+            ['optional' => true],
+        );
+
+        $mform->addElement('text', 'maxentries', get_string('maxentries', 'callforpaper'));
+        $mform->setType('maxentries', PARAM_INT);
+        $mform->addRule('maxentries', null, 'numeric', null, 'client');
+        // $mform->addElement('html', \html_writer::div(get_string('maxentries_help', 'mod_callforpaper'), 'ps-5'));
+        $mform->addHelpButton('maxentries', 'maxentries', 'callforpaper');
 
         $mform->addElement('selectyesno', 'manageapproved', get_string('manageapproved', 'callforpaper'));
         $mform->addHelpButton('manageapproved', 'manageapproved', 'callforpaper');
         $mform->setDefault('manageapproved', 1);
-        $mform->hideIf('manageapproved', 'approval', 'eq', 0);
-
-        $mform->addElement('selectyesno', 'comments', get_string('allowcomments', 'callforpaper'));
-        if (empty($CFG->usecomments)) {
-            $mform->hardFreeze('comments');
-            $mform->setConstant('comments', 0);
-        }
-
-        $countoptions = array(0=>get_string('none'))+
-                        (array_combine(range(1, CALLFORPAPER_MAX_ENTRIES), // Keys.
-                                        range(1, CALLFORPAPER_MAX_ENTRIES))); // Values.
-        /*only show fields if there are legacy values from
-         *before completionentries was added*/
-        if (!empty($this->current->requiredentries)) {
-            $group = array();
-            $group[] = $mform->createElement('select', 'requiredentries',
-                    get_string('requiredentries', 'callforpaper'), $countoptions);
-            $mform->addGroup($group, 'requiredentriesgroup', get_string('requiredentries', 'callforpaper'), array(''), false);
-            $mform->addHelpButton('requiredentriesgroup', 'requiredentries', 'callforpaper');
-            $mform->addElement('html', $OUTPUT->notification( get_string('requiredentrieswarning', 'callforpaper')));
-        }
-
-        $mform->addElement('select', 'requiredentriestoview', get_string('requiredentriestoview', 'callforpaper'), $countoptions);
-        $mform->addHelpButton('requiredentriestoview', 'requiredentriestoview', 'callforpaper');
-
-        $mform->addElement('select', 'maxentries', get_string('maxentries', 'callforpaper'), $countoptions);
-        $mform->addHelpButton('maxentries', 'maxentries', 'callforpaper');
+        // $mform->hideIf('manageapproved', 'approval', 'eq', 0);
 
         // ----------------------------------------------------------------------
-        $mform->addElement('header', 'availibilityhdr', get_string('availability'));
+        $mform->addElement('header', 'reviewsheader', get_string('reviews', 'callforpaper'));
 
-        $mform->addElement('date_time_selector', 'timeavailablefrom', get_string('availablefromdate', 'callforpaper'),
-                           array('optional' => true));
+        $mform->addElement(
+            'date_time_selector',
+            'timereview',
+            get_string('reviewsdate', 'callforpaper'),
+            ['optional' => true],
+        );
+        $mform->addHelpButton('timereview', 'reviewsdate', 'callforpaper');
 
-        $mform->addElement('date_time_selector', 'timeavailableto', get_string('availabletodate', 'callforpaper'),
-                           array('optional' => true));
+        $mform->addElement('text', 'maxreviewers', get_string('maxreviewers', 'callforpaper'));
+        $mform->setType('maxreviewers', PARAM_INT);
+        $mform->addHelpButton('maxreviewers', 'maxreviewers', 'callforpaper');
+        $mform->setDefault('maxreviewers', 3);
+        $mform->addRule('maxreviewers', null, 'numeric', null, 'client');
+        $mform->addRule('maxreviewers', null, 'required', null, 'client');
+        // $mform->addElement('html', \html_writer::div(get_string('maxreviewers_help', 'mod_callforpaper'), 'ps-5'));
 
-        $mform->addElement('date_time_selector', 'timeviewfrom', get_string('viewfromdate', 'callforpaper'),
-                           array('optional' => true));
+        // ----------------------------------------------------------------------
 
-        $mform->addElement('date_time_selector', 'timeviewto', get_string('viewtodate', 'callforpaper'),
-                           array('optional' => true));
+        // $mform->addElement('header', 'entrieshdr', get_string('entries', 'callforpaper'));
+
+        // $mform->addElement('selectyesno', 'approval', get_string('requireapproval', 'callforpaper'));
+        // $mform->addHelpButton('approval', 'requireapproval', 'callforpaper');
+        $mform->addElement('hidden', 'approval');
+        $mform->setType('approval', PARAM_INT);
+        $mform->setDefault('approval', 1);
+
+        // $mform->addElement('selectyesno', 'comments', get_string('allowcomments', 'callforpaper'));
+        // if (empty($CFG->usecomments)) {
+        //     $mform->hardFreeze('comments');
+        //     $mform->setConstant('comments', 0);
+        // }
+
+        // $countoptions = array(0=>get_string('none'))+
+        //                 (array_combine(range(1, CALLFORPAPER_MAX_ENTRIES), // Keys.
+        //                                 range(1, CALLFORPAPER_MAX_ENTRIES))); // Values.
+        // /*only show fields if there are legacy values from
+        //  *before completionentries was added*/
+        // if (!empty($this->current->requiredentries)) {
+        //     $group = array();
+        //     $group[] = $mform->createElement('select', 'requiredentries',
+        //             get_string('requiredentries', 'callforpaper'), $countoptions);
+        //     $mform->addGroup($group, 'requiredentriesgroup', get_string('requiredentries', 'callforpaper'), array(''), false);
+        //     $mform->addHelpButton('requiredentriesgroup', 'requiredentries', 'callforpaper');
+        //     $mform->addElement('html', $OUTPUT->notification( get_string('requiredentrieswarning', 'callforpaper')));
+        // }
+
+        // $mform->addElement('select', 'requiredentriestoview', get_string('requiredentriestoview', 'callforpaper'), $countoptions);
+        // $mform->addHelpButton('requiredentriestoview', 'requiredentriestoview', 'callforpaper');
+        // $mform->addElement('hidden', 'requiredentriestoview');
+        // $mform->setType('requiredentriestoview', PARAM_INT);
+        // $mform->setDefault('requiredentriestoview', 0);
+
+        // ----------------------------------------------------------------------
+        // $mform->addElement('header', 'availibilityhdr', get_string('availability'));
+
+        // $mform->addElement('date_time_selector', 'timeavailablefrom', get_string('availablefromdate', 'callforpaper'),
+        //                    array('optional' => true));
+
+        // $mform->addElement('date_time_selector', 'timeavailableto', get_string('availabletodate', 'callforpaper'),
+        //                    array('optional' => true));
+
+        // $mform->addElement('date_time_selector', 'timeviewfrom', get_string('viewfromdate', 'callforpaper'),
+        //                    array('optional' => true));
+
+        // $mform->addElement('date_time_selector', 'timeviewto', get_string('viewtodate', 'callforpaper'),
+        //                    array('optional' => true));
+
+        $mform->addElement('hidden', 'timeavailablefrom');
+        $mform->setType('timeavailablefrom', PARAM_INT);
+        $mform->setDefault('timeavailablefrom', 0);
+        $mform->addElement('hidden', 'timeavailableto');
+        $mform->setType('timeavailableto', PARAM_INT);
+        $mform->setDefault('timeavailableto', 0);
 
         // ----------------------------------------------------------------------
         if ($CFG->enablerssfeeds && $CFG->callforpaper_enablerssfeeds) {

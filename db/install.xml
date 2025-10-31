@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/callforpaper/db" VERSION="20250414" COMMENT="XMLDB file for Moodle mod/callforpaper"
+<XMLDB PATH="mod/callforpaper/db" VERSION="20251103" COMMENT="XMLDB file for Moodle mod/callforpaper"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -16,6 +16,7 @@
         <FIELD NAME="timeavailableto" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timeviewfrom" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timeviewto" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timereview" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="requiredentries" TYPE="int" LENGTH="8" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="requiredentriestoview" TYPE="int" LENGTH="8" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="maxentries" TYPE="int" LENGTH="8" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>

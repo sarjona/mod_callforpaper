@@ -126,6 +126,9 @@ class template {
             case 'addtemplate':
             case 'asearchtemplate':
             case 'listtemplate':
+            case 'reviewerlisttemplate':
+            case 'reviewerlisttemplatefooter':
+            case 'reviewerlisttemplateheader':
             case 'rsstemplate':
             case 'singletemplate':
             case 'slottemplate':
@@ -458,7 +461,11 @@ class template {
      * @return string the tag replacement
      */
     protected function get_tag_moreurl_replacement(stdClass $entry, bool $canmanageentry): string {
-        $url = new moodle_url($this->baseurl, [
+        $baseurl = $this->baseurl;
+        if (str_contains($baseurl, 'callforpaper/review')) {
+            $baseurl = str_replace('callforpaper/review', 'callforpaper/', $baseurl);
+        }
+        $url = new moodle_url($baseurl, [
             'rid' => $entry->id,
             'filter' => 1,
         ]);
@@ -652,14 +659,10 @@ class template {
         if (!$this->instance->approval) {
             return '';
         }
-        return ($entry->approved) ?
-            html_writer::div(
-                get_string('approved', 'callforpaper'),
-                'mod-callforpaper-approval-status-badge',
-            ) : html_writer::div(
-                get_string('notapproved', 'callforpaper'),
-                'mod-callforpaper-approval-status-badge',
-            );
+        $renderer = $this->manager->get_renderer();
+        return $renderer->render_from_template('mod_callforpaper/approval_status', [
+            'isapproved' => $entry->approved,
+        ]);
     }
 
     /**
@@ -778,19 +781,67 @@ class template {
     }
 
     protected function get_tag_review_replacement(stdClass $entry, bool $canmanageentry): string {
-        global $OUTPUT;
+        global $OUTPUT, $USER;
         if (!$canmanageentry) {
             return '';
         }
-        $url = new moodle_url('/mod/callforpaper/review.php', [
-            'id' => $entry->id,
-        ]);
 
-        return html_writer::tag(
-            'span',
-            $OUTPUT->action_icon($url, $this->icons['review']),
-            ['class' => 'review']
-        );
+        $renderer = $this->manager->get_renderer();
+        $assigned = false;
+        $reviewerinfos = reviewer_information::get_data_for_record($entry->id);
+        $output = '';
+        for ($i = 1; $i <= $this->instance->maxreviewers; $i++) {
+            $params = ['id' => $entry->id];
+            $reviewername = '';
+            $canedit = false;
+            $addreview = false;
+            $isaccept = false;
+            $isreject = false;
+            $isundecided = false;
+            $canseereview = false;
+            if ($reviewerinfos && $i <= count($reviewerinfos)) {
+                $reviewerinfo = $reviewerinfos[array_keys($reviewerinfos)[$i - 1]];
+                $params['reviewerid'] = $reviewerinfo->get('id');
+                $userid = $reviewerinfo->get('revieweruserid');
+                $reviewername = core_user::get_fullname(core_user::get_user($userid));
+                $canseereview = $this->manager->can_view_reviewer_info($userid);
+                if ($userid == $USER->id) {
+                    $canedit = true;
+                    $assigned = true;
+                }
+                if ($canedit || ($this->instance->timereview > 0 && time() >= $this->instance->timereview)) {
+                    $status = $reviewerinfo->get('approval');
+                    switch ($status) {
+                        case manager::ACCEPT_STATUS:
+                            $isaccept = true;
+                            break;
+                        case manager::REJECT_STATUS:
+                            $isreject = true;
+                            break;
+                        case manager::UNDECIDED_STATUS:
+                            $isundecided = true;
+                            break;
+                    }
+                }
+            } else if ($i == count($reviewerinfos) + 1 && !$assigned && !callforpaper_isowner($entry->id)) {
+                // Next reviewer can be self assigned only if not already assigned and not the owner.
+                $addreview = true;
+
+            }
+            $actionurl = new \core\url('/mod/callforpaper/review.php', $params);
+            $output .= $renderer->render_from_template('mod_callforpaper/reviewer_cell', [
+                'reviewername' => $reviewername,
+                'actionurl' => $actionurl->out(false),
+                'canedit' => $canedit,
+                'addreview' => $addreview,
+                'isaccept' => $isaccept,
+                'isreject' => $isreject,
+                'isundecided' => $isundecided,
+                'canseereview' => $canseereview,
+            ]);
+        }
+
+        return $output;
     }
 
     /**
@@ -920,7 +971,7 @@ class template {
         }
 
         for ($i = 1; $i <= $this->instance->maxreviewers; $i++) {
-            $output .= '<th>' . get_string('reviewer_i', 'mod_callforpaper', $i) . '</th>';
+            $output .= '<th class="reviewerlistheader">' . get_string('reviewer_i', 'mod_callforpaper', $i) . '</th>';
         }
 
         return $output;
@@ -936,13 +987,7 @@ class template {
         $dataforrecord = reviewer_information::get_data_for_record($entry->id);
         $output = '';
 
-        // SARATODO: Should this be removed?
-        $options = [
-            0 => '--',
-            1 => get_string('ilike', 'mod_callforpaper'),
-            2 => get_string('meh', 'mod_callforpaper'),
-            3 => get_string('dislike', 'mod_callforpaper'),
-        ];
+        $options = manager::get_status_options();
 
         foreach ($dataforrecord as $record) {
             $user = core_user::get_user($record->get('revieweruserid'));

@@ -61,6 +61,18 @@ class manager {
         'slottemplate' => 'slottemplate.html',
     ];
 
+    /** None status */
+    const NONE_STATUS = 0;
+
+    /** Accepted status */
+    const ACCEPT_STATUS = 1;
+
+    /** Rejected status */
+    const REJECT_STATUS = 2;
+
+    /** Undecided status */
+    const UNDECIDED_STATUS = 3;
+
     /** @var string plugin path. */
     public $path;
 
@@ -590,6 +602,16 @@ class manager {
         return has_capability('mod/callforpaper:approve', $this->context, $userid);
     }
 
+    public function can_view_reviewer_info(int $userid = null): bool {
+        global $USER;
+
+        if ($userid === null) {
+            return false;
+        }
+
+        return ($userid == $USER->id || ($this->instance->timereview > 0 && time() >= $this->instance->timereview));
+    }
+
     /**
      * Update the callforpaper templates.
      *
@@ -743,5 +765,14 @@ class manager {
         }
 
         return $presets;
+    }
+
+    public static function get_status_options(): array {
+        return [
+            self::NONE_STATUS => '',
+            self::ACCEPT_STATUS => get_string('accept', 'mod_callforpaper'),
+            self::REJECT_STATUS => get_string('reject', 'mod_callforpaper'),
+            self::UNDECIDED_STATUS => get_string('undecided', 'mod_callforpaper'),
+        ];
     }
 }

@@ -211,3 +211,8 @@ td.entry-not-approved,
 .entry-not-approved a {
     color: var(--bs-gray-500) !important;
 }
+
+th.reviewerlistheader {
+    background-color: var(--bs-light) !important;
+    text-align: center;
+}

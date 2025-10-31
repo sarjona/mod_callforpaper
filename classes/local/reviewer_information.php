@@ -47,6 +47,9 @@ class reviewer_information {
     }
 
     public static function get_data_for_record(int $recordid) {
+        if (!isset(self::$data[$recordid])) {
+            return [];
+        }
         return self::$data[$recordid];
     }
 

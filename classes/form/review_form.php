@@ -27,6 +27,7 @@ namespace mod_callforpaper\form;
 global $CFG;
 
 use core\form\persistent;
+use mod_callforpaper\manager;
 
 require_once($CFG->libdir . '/formslib.php');
 class review_form extends persistent {
@@ -35,30 +36,38 @@ class review_form extends persistent {
     protected static $persistentclass = 'mod_callforpaper\\local\\persistent\\record_review';
 
     protected function definition() {
+        global $USER;
+
         $mform = $this->_form;
 
-        $persistent =  $this->get_persistent();
+        $this->get_persistent();
+        $persistent = $this->get_persistent();
+        $userid = $persistent->get('revieweruserid');
+        $canedit = $userid == $USER->id;
 
+        $params = [];
+        if (!$canedit) {
+            $params['disabled'] = true;
+        }
 
-        $mform->addElement('textarea', 'reviewtext', get_string('review_comment', 'mod_callforpaper'));
+        $mform->addElement(
+            'select',
+            'approval',
+            get_string('rating', 'mod_callforpaper'),
+            manager::get_status_options(),
+            $params,
+        );
+
+        $mform->addElement(
+            'textarea',
+            'reviewtext',
+            get_string('review_comment', 'mod_callforpaper'),
+            $params + ['rows' => 6]
+        );
         $mform->setType('reviewtext', PARAM_RAW);
 
-        $dislike_options = [
-            get_string('dislike', 'mod_callforpaper'),
-            'no like',
-            'i hate',
-            'igitt',
-            'don\'t like'
-        ];
-        // SARATODO: Should this be removed?
-        $dislike_string = $dislike_options[rand(0, count($dislike_options) - 1)];
-        $options = [
-            0 => '--',
-            1 => get_string('ilike', 'mod_callforpaper'),
-            2 => get_string('meh', 'mod_callforpaper'),
-            3 => $dislike_string,
-        ];
-        $mform->addElement('select', 'approval', get_string('rating', 'mod_callforpaper'), $options);
-        $this->add_action_buttons();
+        if ($canedit) {
+            $this->add_action_buttons();
+        }
     }
 }

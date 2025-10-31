@@ -156,7 +156,7 @@ $order = (optional_param('order', $SESSION->dataprefs[$data->id]['order'], PARAM
 $SESSION->dataprefs[$data->id]['order'] = $order;     // Make it sticky
 
 
-$oldperpage = get_user_preferences('callforpaper_perpage_'.$data->id, 10);
+$oldperpage = get_user_preferences('callforpaper_perpage_'.$data->id, 20);
 $perpage = optional_param('perpage', $oldperpage, PARAM_INT);
 
 if ($perpage < 2) {
@@ -373,7 +373,7 @@ if ($showactivity) {
 
     if ($mode == 'asearch') {
         $maxcount = 0;
-        callforpaper_print_preference_form($data, $perpage, $search, $sort, $order, $search_array, $advanced, $mode);
+        callforpaper_print_preference_form($data, $perpage, $search, $sort, $order, $search_array, $advanced, $mode, 'reviewview.php');
 
     } else {
         // Approve or disapprove any requested records
@@ -428,7 +428,7 @@ if ($showactivity) {
 
         // Advanced search form doesn't make sense for single (redirects list view).
         if ($maxcount && $mode != 'single') {
-            callforpaper_print_preference_form($data, $perpage, $search, $sort, $order, $search_array, $advanced, $mode);
+            callforpaper_print_preference_form($data, $perpage, $search, $sort, $order, $search_array, $advanced, $mode, 'reviewview.php');
         }
 
         if (empty($records)) {
@@ -460,74 +460,33 @@ if ($showactivity) {
                 echo $OUTPUT->box_end();
             }
 
-            // SARATODO: Review this code, because it's not used.
-            if ($mode == 'single' && false) { // Single template
-                $baseurl = '/mod/callforpaper/reviewview.php';
-                $baseurlparams = ['d' => $data->id, 'mode' => 'single'];
-                if (!empty($search)) {
-                    $baseurlparams['filter'] = 1;
-                }
-                if (!empty($page)) {
-                    $baseurlparams['page'] = $page;
-                }
-                $baseurl = new moodle_url($baseurl, $baseurlparams);
-
-                echo $OUTPUT->box_start('', 'callforpaper-singleview-content');
-                require_once($CFG->dirroot.'/rating/lib.php');
-                if ($data->assessed != RATING_AGGREGATE_NONE) {
-                    $ratingoptions = new stdClass;
-                    $ratingoptions->context = $context;
-                    $ratingoptions->component = 'mod_callforpaper';
-                    $ratingoptions->ratingarea = 'entry';
-                    $ratingoptions->items = $records;
-                    $ratingoptions->aggregate = $data->assessed;//the aggregation method
-                    $ratingoptions->scaleid = $data->scale;
-                    $ratingoptions->userid = $USER->id;
-                    $ratingoptions->returnurl = $baseurl->out();
-                    $ratingoptions->assesstimestart = $data->assesstimestart;
-                    $ratingoptions->assesstimefinish = $data->assesstimefinish;
-
-                    $rm = new rating_manager();
-                    $records = $rm->get_ratings($ratingoptions);
-                }
-
-                $options = [
-                    'search' => $search,
-                    'page' => $page,
-                    'baseurl' => $baseurl,
-                ];
-                $parser = $manager->get_template('singletemplate', $options);
-                echo $parser->parse_entries($records);
-                echo $OUTPUT->box_end();
-            } else {
-                // List template.
-                $baseurl = '/mod/callforpaper/reviewview.php';
-                $baseurlparams = ['d' => $data->id, 'advanced' => $advanced, 'paging' => $paging];
-                if (!empty($search)) {
-                    $baseurlparams['filter'] = 1;
-                }
-                $baseurl = new moodle_url($baseurl, $baseurlparams);
-
-                echo $OUTPUT->box_start('', 'callforpaper-listview-content');
-
-                $options = [
-                    'search' => $search,
-                    'page' => $page,
-                    'baseurl' => $baseurl,
-                ];
-
-                $firstrecord = $records[array_key_first($records)];
-
-                $parser = $manager->get_template('reviewerlisttemplateheader', $options);
-                echo $parser->parse_entries([$firstrecord]);
-
-                $parser = $manager->get_template('reviewerlisttemplate', $options);
-                echo $parser->parse_entries($records);
-
-                $parser = $manager->get_template('reviewerlisttemplatefooter', $options);
-                echo $parser->parse_entries([$firstrecord]);
-                echo $OUTPUT->box_end();
+            // List template.
+            $baseurl = '/mod/callforpaper/reviewview.php';
+            $baseurlparams = ['d' => $data->id, 'advanced' => $advanced, 'paging' => $paging];
+            if (!empty($search)) {
+                $baseurlparams['filter'] = 1;
             }
+            $baseurl = new moodle_url($baseurl, $baseurlparams);
+
+            echo $OUTPUT->box_start('', 'callforpaper-listview-content');
+
+            $options = [
+                'search' => $search,
+                'page' => $page,
+                'baseurl' => $baseurl,
+            ];
+
+            $firstrecord = $records[array_key_first($records)];
+
+            $parser = $manager->get_template('reviewerlisttemplateheader', $options);
+            echo $parser->parse_entries([$firstrecord]);
+
+            $parser = $manager->get_template('reviewerlisttemplate', $options);
+            echo $parser->parse_entries($records);
+
+            $parser = $manager->get_template('reviewerlisttemplatefooter', $options);
+            echo $parser->parse_entries([$firstrecord]);
+            echo $OUTPUT->box_end();
 
             $stickyfooter = new mod_callforpaper\output\view_footer(
                 $manager,

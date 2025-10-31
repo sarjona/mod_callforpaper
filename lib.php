@@ -1740,13 +1740,13 @@ function mod_callforpaper_rating_can_see_item_ratings($params) {
  * @param string $mode
  * @return void
  */
-function callforpaper_print_preference_form($callforpaper, $perpage, $search, $sort='', $order='ASC', $search_array = '', $advanced = 0, $mode= ''){
+function callforpaper_print_preference_form($callforpaper, $perpage, $search, $sort='', $order='ASC', $search_array = '', $advanced = 0, $mode= '', $action = 'view.php'){
     global $DB, $PAGE, $OUTPUT;
 
     $cm = get_coursemodule_from_instance('callforpaper', $callforpaper->id);
     $context = context_module::instance($cm->id);
     echo '<div class="callforpaperpreferences my-5">';
-    echo '<form id="options" action="view.php" method="get">';
+    echo '<form id="options" action="' . $action . '" method="get">';
     echo '<div class="d-flex flex-wrap align-items-center gap-1">';
     echo '<input type="hidden" name="d" value="'.$callforpaper->id.'" />';
     if ($mode =='asearch') {
@@ -2611,9 +2611,9 @@ function callforpaper_supports($feature) {
         FEATURE_MOD_INTRO => true,
         FEATURE_COMPLETION_TRACKS_VIEWS => true,
         FEATURE_COMPLETION_HAS_RULES => true,
-        FEATURE_GRADE_HAS_GRADE => true,
-        FEATURE_GRADE_OUTCOMES => true,
-        FEATURE_RATE => true,
+        FEATURE_GRADE_HAS_GRADE => false,
+        FEATURE_GRADE_OUTCOMES => false,
+        FEATURE_RATE => false,
         FEATURE_BACKUP_MOODLE2 => true,
         FEATURE_SHOW_DESCRIPTION => true,
         FEATURE_COMMENT => true,
