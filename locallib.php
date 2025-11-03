@@ -1513,9 +1513,9 @@ function callforpaper_update_record_fields_contents($callforpaper, $record, $con
     global $DB;
 
     // Reset the approved flag after edit if the user does not have permission to approve their own entries.
-    if (!has_capability('mod/callforpaper:approve', $context)) {
-        $record->approved = 0;
-    }
+    // if (!has_capability('mod/callforpaper:approve', $context)) {
+    //     $record->approved = 0;
+    // }
 
     // Update the parent record.
     $record->timemodified = time();
