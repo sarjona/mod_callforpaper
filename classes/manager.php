@@ -775,4 +775,19 @@ class manager {
             self::UNDECIDED_STATUS => get_string('undecided', 'mod_callforpaper'),
         ];
     }
+
+    public function use_default_preset(): bool {
+        // Only use default preset if there is a single preset available and there are no fields yet.
+        if ($this->has_fields()) {
+            return false;
+        }
+
+        $presets = $this->get_available_presets();
+        if (count($presets) == 1) {
+            $importer = local\importer\preset_importer::create_from_plugin_or_directory($this, '/' . $presets[0]->shortname);
+            return $importer->import(false);
+        }
+
+        return false;
+    }
 }

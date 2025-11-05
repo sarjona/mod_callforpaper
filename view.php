@@ -251,16 +251,21 @@ if ($delete && callforpaper_user_can_manage_entry($delete, $callforpaper, $conte
 $currentgroup = groups_get_activity_group($cm, true);
 $groupmode = groups_get_activity_groupmode($cm);
 $canmanageentries = has_capability('mod/callforpaper:manageentries', $context);
-echo $OUTPUT->header();
 
 if (!$manager->has_fields()) {
+    if ($manager->use_default_preset()) {
+        redirect($PAGE->url);
+    }
     // It's a brand-new callforpaper. There are no fields.
+    echo $OUTPUT->header();
     $renderer = $manager->get_renderer();
     echo $renderer->render_callforpaper_zero_state($manager);
     echo $OUTPUT->footer();
     // Don't check the rest of the options. There is no field, there is nothing else to work with.
     exit;
 }
+
+echo $OUTPUT->header();
 
 // Detect entries not approved yet and show hint instead of not found error.
 if ($record and !callforpaper_can_view_record($callforpaper, $record, $currentgroup, $canmanageentries)) {
