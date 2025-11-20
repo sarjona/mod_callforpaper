@@ -161,8 +161,8 @@ class mod_callforpaper_mod_form extends moodleform_mod {
             $errors['timeavailableto'] = get_string('availabletodatevalidation', 'callforpaper');
         }
         if ($callforpaper['timeviewfrom'] && $callforpaper['timeviewto'] &&
-                $callforpaper['timeviewto'] < $callforpaper['timeviewfrom']) {
-            $errors['timeviewto'] = get_string('viewtodatevalidation', 'callforpaper');
+                $callforpaper['timeviewfrom'] < $callforpaper['timeviewto']) {
+            $errors['timeviewfrom'] = get_string('viewtodatevalidation', 'callforpaper');
         }
 
         return $errors;

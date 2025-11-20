@@ -475,7 +475,7 @@ $string['viewfromdate'] = 'Read only from';
 $string['viewnavigation'] = 'View mode tertiary navigation';
 $string['viewtemplates'] = 'View templates';
 $string['viewtodate'] = 'Read only to';
-$string['viewtodatevalidation'] = 'The read only to date cannot be before the read only from date.';
+$string['viewtodatevalidation'] = 'The closing date cannot be before the opening date.';
 $string['wrongcallforpaperid'] = 'Wrong callforpaper ID provided';
 
 $string['reviewcount'] = 'Review count';
