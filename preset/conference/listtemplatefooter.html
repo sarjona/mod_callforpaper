@@ -1,16 +1,65 @@
+<!-- LIST VIEW – FOOTER -->
 <script>
 (function(){
+  // Sort items by option number (1, 2, 3, etc.)
   const buckets = {
-    'presentation': document.getElementById('list-presentation'),
-    'workshop': document.getElementById('list-workshop'),
-    'poster': document.getElementById('list-poster')
+    '1': document.getElementById('list-option-1'),
+    '2': document.getElementById('list-option-2'),
+    '3': document.getElementById('list-option-3')
   };
 
   const items = Array.from(document.querySelectorAll('.lv-item'));
   items.forEach(el => {
-    let course = (el.getAttribute('data-course') || '').trim().toLowerCase();
-    const target = buckets[course] || buckets['presentation']; // fallback
+    // Get the option value - could be "1", "2", "3" or "Presentation", "Workshop", etc.
+    let option = (el.getAttribute('data-option') || '').trim();
+    
+    // Extract just the number if it's there
+    // This handles both "1" and "1. Presentation" formats
+    let optionNumber = option.match(/^\d+/) ? option.match(/^\d+/)[0] : null;
+    
+    // If no number found, try to match text as fallback
+    if (!optionNumber) {
+      let optionLower = option.toLowerCase();
+      if (optionLower.includes('presentation')) optionNumber = '1';
+      else if (optionLower.includes('workshop')) optionNumber = '2';
+      else if (optionLower.includes('poster')) optionNumber = '3';
+    }
+    
+    // Get target list, default to option 1 if not found
+    const target = buckets[optionNumber] || buckets['1'];
     if (target) target.appendChild(el);
+  });
+  
+  // Style buttons
+  document.querySelectorAll('.lv-actions a[href*="mode=single"]').forEach(function(btn){
+    btn.classList.add('btn', 'btn-sm', 'cfp-btn-view');
+    btn.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i> View';
+  });
+  
+  document.querySelectorAll('.lv-actions a[href*="mode=edit"]').forEach(function(btn){
+    btn.classList.add('btn', 'btn-sm', 'cfp-btn-edit');
+    btn.innerHTML = '<i class="fa fa-pencil" aria-hidden="true"></i> Edit';
+  });
+  
+  document.querySelectorAll('.lv-actions a[href*="delete="]').forEach(function(btn){
+    btn.classList.add('btn', 'btn-sm', 'cfp-btn-delete');
+    btn.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i> Delete';
   });
 })();
 </script>
+
+<style>
+.btn.cfp-btn-view {
+  background: var(--moodle-blue);
+  border: 1px solid var(--moodle-blue);
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn.cfp-btn-view:hover {
+  background: #0d3045;
+  border-color: #0d3045;
+  color: #fff;
+}
+</style>

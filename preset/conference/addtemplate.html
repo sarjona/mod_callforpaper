@@ -1,37 +1,129 @@
-<div id="defaulttemplate-addentry">
-<div class="mb-3 pt-3">
-<div class="fw-bold">Title</div>
-[[Title]]</div>
-<div class="mb-3 pt-3">
-<div class="fw-bold">Abstract (only text)</div>
-<div class="fw-bold">[[Abstract]]</div>
-<div class="fw-bold">
-<div class="mb-3 pt-3"> </div>
-</div>
-</div>
-<div class="mb-3 pt-3">
-<div class="fw-bold">
-<div class="mb-3">
-<div class="fw-bold">Type of presentation</div>
-[[Type of presentation]]</div>
-<hr>Target audience (You can select multiple options)</div>
-[[Target Groups]]<hr>
-<div class="mb-3">
-<div class="fw-bold">Speaker name</div>
-<div class="fw-bold">[[Speaker name]]</div>
-<div class="mb-3 pt-3">
-<div class="fw-bold">Speaker email</div>
-<div class="fw-bold">[[Speaker email]]</div>
-<div class="mb-3 pt-3">
-<div class="mb-3 pt-3">
-<div class="fw-bold">Presentation</div>
-<div class="mb-3 pt-3">Upload your presentation or external link (make sure it is public).<br>
-<p>[[Presentation (file)]]</p>
-<p>External link: [[Presentation (URL)]]</p>
-</div>
-</div>
-</div>
-<span style="text-align: initial;">##otherfields##</span></div>
-</div>
-</div>
+
+
+<div class="defaulttemplate">
+  <div class="mod-data-default-template ##approvalstatusclass##">
+
+    <!-- Header -->
+    <div class="cfp-header">
+      Submission Form
+    </div>
+
+    <!-- Title -->
+    <div class="cfp-card cfp-blue">
+      <label class="cfp-label">Title<span class="required-mark">*</span></label>
+      [[Title]]
+    </div>
+
+    <!-- Abstract -->
+    <div class="cfp-card cfp-blue">
+      <label class="cfp-label">Abstract <span class="required-mark">*</span></label>
+      <p class="cfp-help">Enter text only. No images, videos. No formating.</p>
+      [[Abstract]]
+
+    </div>
+
+    <!-- Type of session -->
+    <div class="cfp-card cfp-blue">
+      <label class="cfp-label">Type of session <span class="required-mark">*</span></label>
+      [[Type of session]]
+    </div>
+
+    <!-- Target groups -->
+    <div class="cfp-card cfp-gray">
+      <label class="cfp-label">Target groups</label>
+      <p class="cfp-help">You can select multiple options</p>
+      [[Target groups]]
+    </div>
+
+    <!-- Keywords -->
+    <div class="cfp-card cfp-gray">
+      <label class="cfp-label">Keywords</label>
+      <p class="cfp-help">Three to five keywords related to your presentation content, separated by commas</p>
+      [[Keywords]]
+    </div>
+
+    <!-- Track -->
+    <div class="cfp-card cfp-gray">
+      <label class="cfp-label">Track</label>
+      <p class="cfp-help">Select the topical track most suitable for your presentation</p>
+      [[Track]]
+    </div>
+
+    <!-- Speaker -->
+    <div class="cfp-card cfp-blue">
+      <label class="cfp-label">Speaker(s)<span class="required-mark">*</span></label>  <label class="cfp-label-sub">Name of speaker <span class="required-mark">*</span></label>
+      [[Name of speaker]]
+
+      <label class="cfp-label cfp-label-sub">Speaker email <span class="required-mark">*</span></label>
+      [[Speaker email]]
+
+      <label class="cfp-label cfp-label-sub">Co-presenters' names (if applicable)</label>
+      [[Further speakers names]]
+
+      <label class="cfp-label cfp-label-sub">Organization or institution</label>
+      [[Workplace]]
+    </div>
+
+          <!-- Programme materials -->
+    <div class="cfp-card cfp-gray">
+      <label class="cfp-label">Image related to you and/or your presentation</label>
+      <p class="cfp-help">Will appear with your abstract in the programme.</p>
+      [[Image]]
+    </div>
+
+    <!-- Presentation materials -->
+    <div class="cfp-card cfp-blue">
+      <label class="cfp-label">Presentation</label>
+      <label class="cfp-label-sub">Presentation file</label>
+      <p class="cfp-help">Make available prior to event</p>
+      [[Presentation file]]
+<br>
+      <!-- URL label + field (responsive two columns) -->
+      <div class="cfp-row">
+        <div class="cfp-col cfp-col-label">
+          <label class="cfp-label-sub">URL of presentation</label>
+          <p class="cfp-help">Optional. Make sure it is accessible.</p>
+        </div>
+        <div class="cfp-col">
+          [[URL of presentation]]
+        </div>
+      </div>
+    </div>
+
+
+     <!-- After Approval - For Reviewers Only-->
+    <div class="cfp-card cfp-muted added_field">
+      <label class="cfp-label">For Reviewers Only - After Approval</label>
+
+      <label class="cfp-label-sub">Programme date</label>
+      [[Program date]]
+
+      <!-- Room label + dropdown -->
+      <div class="cfp-row">
+        <div class="cfp-col cfp-col-label">
+          <label class="cfp-label-sub">Room</label>
+        </div>
+        <div class="cfp-col">
+          [[Room]]
+        </div>
+      </div>
+    </div>
+
+    <!-- After Session - For Reviewers Only -->
+    <div class="cfp-card cfp-muted added_field">
+      <label class="cfp-label">For Reviewers Only - After Session -</label>
+
+      <!-- Recording label + field -->
+      <div class="cfp-row">
+        <div class="cfp-col cfp-col-label">
+          <label class="cfp-label-sub">Recording of session</label>
+        </div>
+        <div class="cfp-col">
+          [[Recording of session]]
+        </div>
+      </div>
+    </div>
+
+
+  </div>
 </div>

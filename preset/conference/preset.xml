@@ -17,60 +17,18 @@
 </settings>
 
 <field>
-<type>picture</type>
-<name>Photo</name>
-<description>Photo</description>
-<required>0</required>
-<param3>0</param3>
-</field>
-
-<field>
-<type>file</type>
-<name>Presentation (file)</name>
-<description>File containing the presentation to be used during the talk</description>
-<required>0</required>
-<param3>104857600</param3>
-</field>
-
-<field>
-<type>url</type>
-<name>Presentation (URL)</name>
-<description>URL of presentation</description>
-<required>0</required>
-<param1>on</param1>
-<param2>External link to the presentation</param2>
-<param3>on</param3>
-</field>
-
-<field>
-<type>url</type>
-<name>Recording of the session</name>
-<required>0</required>
-<param1>on</param1>
-<param2>Access the recording of the session (opens in a new window)</param2>
-<param3>on</param3>
-</field>
-
-<field>
 <type>text</type>
 <name>Title</name>
-<required>0</required>
-</field>
-
-<field>
-<type>radiobutton</type>
-<name>Type of presentation</name>
-<required>0</required>
-<param1>Presentation
-Workshop
-Poster</param1>
+<required>1</required>
+<hidden>0</hidden>
 </field>
 
 <field>
 <type>textarea</type>
 <name>Abstract</name>
-<description>(only text)</description>
-<required>0</required>
+<description>(plain text)</description>
+<required>1</required>
+<hidden>0</hidden>
 <param2>40</param2>
 <param3>20</param3>
 <param4>1</param4>
@@ -79,41 +37,135 @@ Poster</param1>
 
 <field>
 <type>text</type>
-<name>Speaker name</name>
-<required>0</required>
-</field>
-
-<field>
-<type>text</type>
 <name>Speaker email</name>
-<required>0</required>
-</field>
-
-<field>
-<type>multimenu</type>
-<name>Target Groups</name>
-<description>You can select multiple options.</description>
-<required>0</required>
-<param1>Martians
-Moonians
-Sunnies
-Juptierians</param1>
+<description>Primary contact email</description>
+<required>1</required>
+<hidden>0</hidden>
 </field>
 
 <field>
 <type>menu</type>
 <name>Room</name>
 <required>0</required>
-<param1>Aula Magna
-Sala 3iPunt
-Sal&#xF3;n de Grados
-Sala Murales</param1>
 <hidden>1</hidden>
+<param1>Room 1
+Room 2
+Room 3</param1>
+</field>
+
+<field>
+<type>picture</type>
+<name>Image</name>
+<description>Image of you or related to the presentation</description>
+<required>0</required>
+<hidden>0</hidden>
+<param3>0</param3>
+</field>
+
+<field>
+<type>file</type>
+<name>Presentation file</name>
+<description>Upload your presentation file</description>
+<required>0</required>
+<hidden>0</hidden>
+<param3>104857600</param3>
+</field>
+
+<field>
+<type>url</type>
+<name>URL of presentation</name>
+<description>External link to the presentation</description>
+<required>0</required>
+<hidden>0</hidden>
+<param1>on</param1>
+<param2>External link to the presentation (opens in a new window)</param2>
+<param3>on</param3>
+</field>
+
+<field>
+<type>url</type>
+<name>Recording of session</name>
+<description>Link to a recording (to be uploaded after the event)</description>
+<required>0</required>
+<hidden>1</hidden>
+<param1>on</param1>
+<param2>Access the recording of the session (opens in a new window)</param2>
+<param3>on</param3>
+</field>
+
+<field>
+<type>radiobutton</type>
+<name>Type of session</name>
+<required>1</required>
+<hidden>0</hidden>
+<param1>Presentation
+Workshop
+Poster</param1>
+</field>
+
+<field>
+<type>text</type>
+<name>Name of speaker</name>
+<description>You can list multiple names</description>
+<required>1</required>
+<hidden>0</hidden>
+</field>
+
+<field>
+<type>checkbox</type>
+<name>Target groups</name>
+<description>You can select multiple options.</description>
+<required>0</required>
+<hidden>0</hidden>
+<param1>Developers
+Designers
+Educators
+Moodle Partners
+Moodle Administrators
+Researchers
+</param1>
+</field>
+
+<field>
+<type>text</type>
+<name>Further speakers names</name>
+<description>Additional co-presenters (if applicable)</description>
+<required>0</required>
+<hidden>0</hidden>
+</field>
+
+<field>
+<type>text</type>
+<name>Workplace</name>
+<description>Organization or institution</description>
+<required>0</required>
+<hidden>0</hidden>
+</field>
+
+<field>
+<type>text</type>
+<name>Keywords</name>
+<description>Keywords related to your presentation content, separated by commas</description>
+<required>0</required>
+<hidden>0</hidden>
+</field>
+
+<field>
+<type>radiobutton</type>
+<name>Track</name>
+<description>Select the most suitable topical track for your presentation</description>
+<required>0</required>
+<hidden>0</hidden>
+<param1>School &amp; University
+Workplace
+Barcamp
+Developers Camp</param1>
 </field>
 
 <field>
 <type>duration</type>
 <name>Program date</name>
+<description>Programme date with start and end time</description>
 <required>0</required>
 <hidden>1</hidden>
 </field>

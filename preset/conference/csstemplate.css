@@ -1,134 +1,591 @@
-/* Karte */
-.recipe-card {
-  max-width: 720px;               /* etwas schmaler für Broschüren-Optik */
-  margin: 1rem auto 2rem;
+/* ================================================
+   CALL FOR PAPERS - MOODLE BRANDING
+   ================================================ */
+
+:root {
+  --moodle-blue: #194866;
+  --moodle-orange: #f98012;
+  --moodle-blue-light: #e6eef4;
+  --moodle-orange-light: #fff5eb;
+  --moodle-gray: #f7f7f7;
+  --border: #e5e7eb;
+  --text: #0d0d0d;
+  --text-muted: #666;
+}
+
+/* ================================================
+   ADD FORM STYLES
+   ================================================ */
+
+.cfp-header {
+  background: var(--moodle-blue);
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin: 0 0 1.5rem 0;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.cfp-card {
   background: #fff;
-  border: 1px solid #ddd;        /* etwas dezenter */
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* sanftere Schatten */
-  overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--moodle-blue);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
-.status-badge {
-  display:inline-block;
-  margin:0.5rem 0 1rem;
-  padding:0.35rem 0.75rem;
-  border-radius:0.5rem;
-  font-size:0.9rem;
-  font-weight:600;
-  background:#E6F0FF;
-  color:#2A4A7B;
-}
+.cfp-gray   { background: var(--moodle-gray); border-left-color: var(--moodle-blue); }
+.cfp-blue   { background: var(--moodle-blue-light); border-left-color: var(--moodle-blue); }
+.cfp-orange { background: var(--moodle-orange-light); border-left-color: var(--moodle-orange); }
+.cfp-muted  { background: #fafafa; border-left-color: var(--border); }
 
-/* Media */
-.media-wrap {
-  position: relative;
-  overflow: hidden;
-  max-height: 280px;             /* Bildhöhe begrenzen */
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.media-wrap img {
-  width: 100% !important;
-  height: auto !important;
-  max-width: none !important;
+.cfp-label {
   display: block;
-  object-fit: cover;             /* Bild locker füllen */
-  max-height: 280px;
-}
-
-
-
-/* Titel-Overlay */
-.title-overlay {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 72px;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 85%);
-}
-
-.title-text {
-  position: absolute; right: 20px; bottom: 14px;
-  color: #f0f3f5;
-  font-weight: 700;
-  font-size: 1.6rem;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
-  max-width: 80%;
-}
-
-/* Fallback-Titel wenn kein Bild */
-.title-plain {
-  display: none; /* per JS wird „block“ */
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--moodle-blue);
   margin: 0 0 0.5rem 0;
-  color: #2f3c44;
-  font-weight: 700;
-  font-size: 1.6rem;
 }
 
-/* Body */
-.recipe-body {
-  padding: 20px 24px 24px;
-  color: #333;
-  line-height: 1.6;
+.cfp-label-sub {
+  display: block;
   font-size: 1rem;
+  font-weight: 600;
+  color: var(--moodle-blue);
+  margin: 1rem 0 0.4rem 0;
 }
 
-/* Course-Pill */
-.course-pill {
-  display: inline-block;
-  padding: 6px 14px;
-  margin: 8px 0 18px 0;
-  border-radius: 20px;
-  background: rgba(30, 120, 180, 0.15); /* dezentes Blau mit Transparenz */
-  color: #1e78b4;
+.required-mark {
+  color: #d9534f;
   font-weight: 700;
+}
+
+.cfp-help {
   font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  box-shadow: 0 1px 3px rgba(30, 120, 180, 0.3);
-}
-
-/* Abschnitte */
-.section {
-  margin-top: 1rem;
-}
-
-.section-title {
-  margin: 0 0 0.5rem 0;
-  font-weight: 700;
-  color: #1e3d59; /*etwas dunkleres Blau */
-  border-bottom: 2px solid #65a1b3; 
-  padding-bottom: 4px;
-  font-size: 1.12rem;
-}
-
-.section-divider {
-  height: 1px;
-  background: #d0d7de;
-  margin: 0.5rem 0 1rem;
-}
-
-.section-content {
-  line-height: 1.7;
-  color: #444;
-  font-size: 1rem;
-  white-space: pre-line; /* für mehrzeilige Zutatenliste */
-}
-
-/* Quelle */
-.recipe-source {
-  text-align: right;
-  color: #6a7d89;
-  margin-top: 28px;
-  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: -0.5rem 0 0.75rem 0;
   font-style: italic;
 }
 
-.lv-status {
-  display:inline-block;
-  margin-right:.5rem;
-  font-size:.85rem;
-  font-weight:600;
-  color:#4E7488;
+.cfp-card input[type="text"],
+.cfp-card textarea,
+.cfp-card select {
+  width: 100%;
+  max-width: 100%;
+}
+
+.cfp-card .form-control-file,
+.cfp-card input[type="file"] {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
 
+/* Generic two-column row that collapses on small screens */
+.cfp-row {
+  display: grid;
+  grid-template-columns: minmax(12ch, 1fr) 2fr; /* label grows from readable min to a fraction */
+  gap: 0.75rem 1rem; /* row gap / column gap */
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+/* Keep label block tidy */
+.cfp-col-label .cfp-label,
+.cfp-col-label .cfp-label-sub {
+  margin: 0;
+}
+
+/* Make helper text tight with label */
+.cfp-col-label .cfp-help {
+  margin: 0.25rem 0 0;
+}
+
+/* Stack on narrow viewports */
+@media (max-width: 48rem) { /* ~768px */
+  .cfp-row {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .cfp-col-label .cfp-help {
+    margin-bottom: 0.25rem;
+  }
+}
+
+.cfp-row {
+  display: grid;
+  grid-template-columns: auto 1fr; /* label = only as wide as needed */
+  gap: 0.75rem 1rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+
+
+
+
+/* ================================================
+   SINGLE VIEW - COMPACT LAYOUT
+   ================================================ */
+
+.cfp-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.25rem 0 1rem;
+  padding: 0.5rem 0;
+}
+
+.cfp-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.cfp-actions .iconsmall,
+.cfp-actions .action-icon {
+  margin: 0;
+}
+
+/* Two-column grid */
+.cfp-single {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .cfp-single {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Panel base */
+.cfp-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin: 0 0 20px 0;
+}
+
+/* Panel headers - default blue */
+.cfp-panel-header {
+  background: var(--moodle-blue-light);
+  color: var(--moodle-blue);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Orange header variant for Event Information */
+.cfp-header-orange {
+  background: var(--moodle-orange-light);
+  color: #8b4000;
+  border-bottom: 2px solid var(--moodle-orange);
+}
+
+/* Alternate header (lighter) */
+.cfp-header-alt {
+  background: #f8f9fa;
+  color: #495057;
+}
+
+/* Panel body */
+.cfp-panel-body {
+  padding: 16px 18px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Primary panel accent (left column main panel) */
+.cfp-panel-primary {
+  border-left: 4px solid var(--moodle-blue);
+}
+
+.cfp-panel-accent {
+  border-left: 4px solid var(--moodle-orange);
+}
+
+/* Title display box */
+.cfp-title-box {
+  background: var(--moodle-gray);
+  padding: 12px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--moodle-orange);
+}
+
+/* Full-width main title box */
+.cfp-title-box-main {
+  max-width: 1400px;
+  margin: 0 auto 20px auto;
+  padding: 16px 20px;
+  background: var(--moodle-gray);
+  border-left: 4px solid var(--moodle-orange);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.cfp-title-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.cfp-title-content {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--moodle-blue);
+  line-height: 1.4;
+}
+
+/* Compact presenters section - no two-column layout */
+.cfp-presenters-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cfp-presenters-compact > div {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.cfp-presenters-compact > div:empty {
+  display: none;
+}
+
+/* Subheadings inside panels */
+.cfp-subhead {
+  margin: 18px 0 8px 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--moodle-blue);
+  border-bottom: 2px solid var(--moodle-orange);
+  padding-bottom: 4px;
+  display: inline-block;
+}
+
+/* Abstract and content text */
+.cfp-abstract,
+.cfp-content {
+  line-height: 1.65;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* Meta grid (right sidebar) */
+.cfp-meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.cfp-meta-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cfp-meta-row:last-child {
+  border-bottom: none;
+}
+
+.cfp-meta-key {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--moodle-blue);
+}
+
+.cfp-meta-val {
+  color: var(--text);
+  font-size: 0.95rem;
+  word-break: break-word;
+}
+
+/* Attachments */
+.cfp-attach {
+  display: grid;
+  gap: 10px;
+}
+
+.cfp-attach-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cfp-attach-row:last-child {
+  border-bottom: none;
+}
+
+.cfp-attach-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--moodle-blue);
+}
+
+.cfp-attach-val {
+  color: var(--text);
+  font-size: 0.95rem;
+  word-break: break-word;
+}
+
+/* Photo display */
+.cfp-photo {
+  text-align: center;
+}
+
+.cfp-photo img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  margin: 0 auto;
+}
+
+
+
+/* ================================================
+   CHECKBOX-FILED COMPACT
+   ================================================ */
+
+.cfp-checkbox-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
+  align-items: center;
+  line-height: 1.4;
+}
+
+/* Nur Text, ohne Rahmen oder Hintergrund */
+.cfp-checkbox-list p,
+.cfp-checkbox-list div,
+.cfp-checkbox-list span,
+.cfp-checkbox-list li {
+  display: inline;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 0.4rem 0 0;
+}
+
+.cfp-checkbox-list p:not(:last-child)::after,
+.cfp-checkbox-list div:not(:last-child)::after,
+.cfp-checkbox-list span:not(:last-child)::after,
+.cfp-checkbox-list li:not(:last-child)::after {
+  content: ",";
+}
+
+
+
+/* ================================================
+   BUTTON STYLES
+   ================================================ */
+
+/* Back to Overview Button - Moodle Blue with White Text */
+.btn.cfp-btn-back,
+.btn.btn-secondary.btn-sm.cfp-back {
+  background: var(--moodle-blue);
+  border: 1px solid var(--moodle-blue);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s;
+}
+
+.btn.cfp-btn-back:hover,
+.btn.btn-secondary.btn-sm.cfp-back:hover {
+  background: #0d3045;
+  border-color: #0d3045;
+  color: #fff;
+}
+
+/* Edit Button */
+.btn.cfp-btn-edit {
+  background: var(--moodle-blue);
+  border: 1px solid var(--moodle-blue);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.2s;
+}
+
+.btn.cfp-btn-edit:hover {
+  background: #0d3045;
+  border-color: #0d3045;
+  color: #fff;
+}
+
+/* Delete Button */
+.btn.cfp-btn-delete {
+  background: #dc3545;
+  border: 1px solid #dc3545;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.2s;
+}
+
+.btn.cfp-btn-delete:hover {
+  background: #c82333;
+  border-color: #bd2130;
+  color: #fff;
+}
+
+/* Publish Button (Approve) */
+.btn.cfp-btn-approve {
+  background: #28a745;
+  border: 1px solid #28a745;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.2s;
+}
+
+.btn.cfp-btn-approve:hover {
+  background: #218838;
+  border-color: #1e7e34;
+  color: #fff;
+}
+
+/* Unpublish Button (Disapprove) */
+.btn.cfp-btn-disapprove {
+  background: #ffc107;
+  border: 1px solid #ffc107;
+  color: #000;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.2s;
+}
+
+.btn.cfp-btn-disapprove:hover {
+  background: #e0a800;
+  border-color: #d39e00;
+  color: #000;
+}
+
+/* Generic secondary button style */
+.btn.btn-secondary.btn-sm {
+  background: #fff;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.2s;
+}
+
+.btn.btn-secondary.btn-sm:hover {
+  background: var(--moodle-blue-light);
+  border-color: var(--moodle-blue);
+  color: var(--moodle-blue);
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+@media (max-width: 768px) {
+  .cfp-header {
+    font-size: 1.25rem;
+    padding: 1rem;
+  }
+
+  .cfp-card {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .cfp-meta-row,
+  .cfp-attach-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .cfp-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .cfp-title-box-main {
+    padding: 12px 16px;
+  }
+}
+
+/* ================================================
+   PRINT
+   ================================================ */
+
+@media print {
+  .cfp-card,
+  .cfp-header,
+  .cfp-panel {
+    box-shadow: none;
+  }
+
+  .d-print-none {
+    display: none !important;
+  }
+}
+
+
+/* =====================================================
+   HIDE MOODLE CALL FOR PRESENTATIONS CONTROLS
+   ===================================================== */
+
+/* Remove horizontal divider lines */
+div[role=main] hr {
+  display: none;
+}
+
+/* Hide buttons for view switching and bulk actions like export */
+div[role=main] .tertiary-navigation {
+  display: none !important;
+}
+
+/* Hide all Moodle database sorting and pagination controls */
+select[name=perpage] {
+  display: none;
+}
+
+select[name=sort] {
+  display: none;
+}
+
+select[name=order] {
+  display: none;
+}
+
+/* Hide preference form labels for sorting controls */
+[for="pref_order"] {
+  display: none !important;
+}
+
+[for="pref_perpage"] {
+  display: none !important;
+}
+
+[for="pref_sortby"] {
+  display: none !important;
+}
